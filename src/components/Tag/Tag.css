@@ -1,0 +1,51 @@
+.tag {
+  display: inline-block;
+  border: 1px solid #bfbfbf;
+  margin-right: .6em;
+  margin-bottom: .6em;
+  border-radius: 999em;
+  font-size: 12px;
+  line-height: 24px;
+}
+.tag:last-child {
+  margin-right: 0;
+}
+.tag__link {
+  display: block;
+  padding: 0 1em;
+  color: #bfbfbf;
+  text-decoration: none;
+}
+.tag:hover {
+  border-color: #0056b3;
+}
+.tag:hover .tag__link {
+  color: #0056b3;
+  text-decoration: none;
+}
+.tag--full:hover {
+  border-color: #0056b3;
+  background-color: #0056b3;
+}
+.tag--full:hover .tag__link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.tag--white {
+  border-color: #fff;
+}
+.tag--white .tag__link {
+  color: #fff;
+}
+.tag--white.tag--full:hover {
+  border-color: #fff6;
+  background-color: #fff6;
+}
+.tag--white.tag--full:hover .tag__link {
+  color: #fff;
+  text-decoration: none;
+}
+.tag--custom-color .tag__link {
+  color: #fff !important;
+}

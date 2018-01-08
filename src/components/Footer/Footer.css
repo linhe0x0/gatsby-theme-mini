@@ -1,0 +1,27 @@
+.footer {
+  padding: 2em 0;
+  margin-top: 50px;
+  font-size: 12px;
+  color: #999;
+  background-color: #000;
+}
+.footer ul {
+  padding-left: 0;
+  list-style: none;
+}
+.footer li {
+  padding: 24px 2em;
+  line-height: 1.8;
+}
+.footer h2 {
+  font-size: 14px;
+  margin: 0 auto 8px;
+  font-weight: 500;
+}
+.footer a {
+  color: #fff;
+  cursor: pointer;
+}
+.footer strong {
+  font-weight: 400;
+}
