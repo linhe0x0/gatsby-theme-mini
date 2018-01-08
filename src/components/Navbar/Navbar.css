@@ -1,0 +1,32 @@
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  font-weight: 700;
+  color: #fff;
+}
+.navbar-custom .nav-item {
+  margin: 0 8px;
+}
+.nav-link:hover {
+  color: #ccc;
+}
+.navbar-custom{
+  transition: .3s;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.navbar-custom.fixed-top {
+  top: -60px;
+}
+.navbar-custom.navbar--is-on-top {
+  top: 0;
+}
+.navbar-custom.navbar--is-visible {
+  top: 0;
+  background-color: #ffffffe6;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+.navbar-custom.navbar--is-visible .navbar-brand,
+.navbar-custom.navbar--is-visible .nav-link {
+  color: #3d464d;
+}
