@@ -14,7 +14,7 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
           {
@@ -30,10 +30,10 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-plugin-nprogress",
+      resolve: 'gatsby-plugin-nprogress',
       options: {
-        // color: config.themeColor
-      },
-    },
+        color: '#366df0',
+      }
+    }
   ]
 }
