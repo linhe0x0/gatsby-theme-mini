@@ -6,6 +6,7 @@ import Link from '../components/Link'
 
 import styles from '../styles/post.module.css'
 import '../styles/highlight.css'
+import '../styles/markdown.css'
 
 class Share extends React.Component {
   componentDidMount() {
