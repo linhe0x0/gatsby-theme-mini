@@ -8,6 +8,8 @@ date: "2018-01-08"
 ---
 # lite
 
+[在线演示](http://blog.sqrtthree.com/)
+
 > 一个基于 Gatsby 的简洁博客主题。
 
 ## 起步
