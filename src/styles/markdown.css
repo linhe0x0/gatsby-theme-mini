@@ -2,5 +2,6 @@
   margin: 48px 0;
 }
 .markdown-body p {
+  line-height: 28px;
   text-align: justify;
 }
