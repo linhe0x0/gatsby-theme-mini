@@ -1,6 +1,6 @@
 # Site metadata
-name: ""
-bio: ""
+name: "your name"
+bio: "Hello, World." # your bio
 avatar: ""
 
 # Article
@@ -9,9 +9,9 @@ defaultAuthor: "默认作者" # The default author of your articles, You can als
 # Site SEO
 language: zh-cmn-Hans # The language of your website. Use a
                       # [2-lettter ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-SEOTitle: "" # Only used to generate HTML <title> for SEO.
-keyword: "" # The keywords of your website
-description: "" # The description of your website
+SEOTitle: "title for SEO" # Only used to generate HTML <title> for SEO.
+keyword: "keyword" # The keywords of your website
+description: "description" # The description of your website
 
 # Site settings
 bgOfHomeHeader: "" # The background-image of your homepage.
