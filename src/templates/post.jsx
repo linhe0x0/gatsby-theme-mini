@@ -98,13 +98,10 @@ const PostTemplate = ({ data, pathContext }) => {
   return (
     <div>
       <Helmet>
-        <html lang={siteMetadata.language} />
         <title>
           {post.frontmatter.title} - 由作者{author}发布于{' '}
           {post.frontmatter.date}
         </title>
-        <meta name="keyword" content={siteMetadata.keyword} />
-        <meta name="description" content={siteMetadata.description} />
         <link
           rel="stylesheet"
           href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css"
@@ -191,10 +188,6 @@ export const query = graphql`
     site {
       siteMetadata {
         defaultAuthor
-        language
-        SEOTitle
-        keyword
-        description
         donation {
           status
           channel {

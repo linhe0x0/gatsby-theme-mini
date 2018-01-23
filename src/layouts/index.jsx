@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Analytics from '../components/Analytics'
 
 const Layout = props => {
+  const { siteMetadata } = props.data.site
   const {
     navbar,
     aboutPage,
@@ -12,10 +14,15 @@ const Layout = props => {
     externalItemOfFooter,
     contact,
     analytics,
-  } = props.data.site.siteMetadata
+  } = siteMetadata
 
   return (
     <div>
+      <Helmet>
+        <html lang={siteMetadata.language} />
+        <meta name="keyword" content={siteMetadata.keyword} />
+        <meta name="description" content={siteMetadata.description} />
+      </Helmet>
       <Navbar {...navbar} showAboutPage={aboutPage.show} />
       {props.children()}
       <Footer
@@ -39,6 +46,9 @@ export const query = graphql`
   query LayoutQuery {
     site {
       siteMetadata {
+        language
+        keyword
+        description
         navbar {
           showDefaultItems
           brand

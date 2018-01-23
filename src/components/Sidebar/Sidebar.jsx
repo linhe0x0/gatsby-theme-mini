@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 import Link from '../Link'
 import Tag from '../Tag'
 
@@ -16,6 +17,12 @@ const Section = props => (
 
 const Sidebar = ({ featuredTags, userInformation, snsLink, friends }) => (
   <div>
+    <Helmet>
+      <link
+        rel="stylesheet"
+        href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+    </Helmet>
     <Section title="FEATURED TAGS" to="/tags">
       <div className="featured-tags">
         {featuredTags.map((item, index) => (

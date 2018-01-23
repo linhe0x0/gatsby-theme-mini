@@ -37,10 +37,7 @@ const CategoryPage = ({ data }) => {
   return (
     <div>
       <Helmet>
-        <html lang={siteMetadata.language} />
         <title>{`Categories - ${siteMetadata.SEOTitle}`}</title>
-        <meta name="keyword" content={siteMetadata.keyword} />
-        <meta name="description" content={siteMetadata.description} />
         <link
           rel="stylesheet"
           href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -92,10 +89,7 @@ export const query = graphql`
         bio
         avatar
         bgOfHomeHeader
-        language
         SEOTitle
-        keyword
-        description
       }
     }
   }

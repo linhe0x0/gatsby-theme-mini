@@ -99,14 +99,7 @@ const IndexPage = props => {
   return (
     <div>
       <Helmet>
-        <html lang={siteMetadata.language} />
         <title>{siteMetadata.SEOTitle}</title>
-        <meta name="keyword" content={siteMetadata.keyword} />
-        <meta name="description" content={siteMetadata.description} />
-        <link
-          rel="stylesheet"
-          href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
       </Helmet>
       <Header
         title={siteMetadata.name}
@@ -169,10 +162,7 @@ export const query = graphql`
         avatar
         defaultAuthor
         bgOfHomeHeader
-        language
         SEOTitle
-        keyword
-        description
         limitOfFeaturedTags
         snsLink {
           icon
