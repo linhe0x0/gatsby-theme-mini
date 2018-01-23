@@ -20,20 +20,20 @@ module.exports = {
           {
             resolve: 'gatsby-remark-highlights',
             options: {
-                scopePrefix: 'syntax--',
-                codeWrap: {
-                  className: 'highlight'
-                },
+              scopePrefix: 'syntax--',
+              codeWrap: {
+                className: 'highlight',
               },
+            },
           },
         ],
-      }
+      },
     },
     {
       resolve: 'gatsby-plugin-nprogress',
       options: {
         color: '#366df0',
-      }
-    }
-  ]
+      },
+    },
+  ],
 }

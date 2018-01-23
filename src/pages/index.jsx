@@ -7,9 +7,9 @@ import Header from '../components/Header'
 import PostPreview from '../components/PostPreview'
 import Sidebar from '../components/Sidebar'
 
-const Pagination = ({ page, totalPage}) => {
-  const hasPrevPage = (page > 1)
-  const hasNextPage = (page < totalPage)
+const Pagination = ({ page, totalPage }) => {
+  const hasPrevPage = page > 1
+  const hasNextPage = page < totalPage
 
   if (!hasPrevPage && !hasNextPage) return null
 
@@ -29,8 +29,8 @@ const Pagination = ({ page, totalPage}) => {
         <li className={prevBtnClass}>
           <Link
             className="page-link"
-            to={ hasPrevPage ? `/pages/${page - 1}` : null }
-            style={{color: "#a3a3a3"}}
+            to={hasPrevPage ? `/pages/${page - 1}` : null}
+            style={{ color: '#a3a3a3' }}
           >
             Previous
           </Link>
@@ -38,8 +38,8 @@ const Pagination = ({ page, totalPage}) => {
         <li className={nextBtnClass}>
           <Link
             className="page-link"
-            to={ hasNextPage ? `/pages/${page + 1}` : null }
-            style={{color: "#a3a3a3"}}
+            to={hasNextPage ? `/pages/${page + 1}` : null}
+            style={{ color: '#a3a3a3' }}
           >
             Next
           </Link>
@@ -49,7 +49,7 @@ const Pagination = ({ page, totalPage}) => {
   )
 }
 
-const IndexPage = (props) => {
+const IndexPage = props => {
   const { allMarkdownRemark } = props.data
 
   if (!allMarkdownRemark) return null
@@ -70,12 +70,12 @@ const IndexPage = (props) => {
 
   const mappedTags = {}
 
-  allMarkdownRemark.edges.forEach((item) => {
+  allMarkdownRemark.edges.forEach(item => {
     const { tags } = item.node.frontmatter
 
     if (!tags) return
 
-    tags.forEach((tag) => {
+    tags.forEach(tag => {
       if (!mappedTags[tag]) {
         mappedTags[tag] = 0
       }
@@ -84,9 +84,12 @@ const IndexPage = (props) => {
     })
   })
 
-  const featuredTags = Object.keys(mappedTags).filter(item => mappedTags[item] >= siteMetadata.limitOfFeaturedTags)
+  const featuredTags = Object.keys(mappedTags).filter(
+    item => mappedTags[item] >= siteMetadata.limitOfFeaturedTags
+  )
 
-  const totalPage = props.pathContext.totalPage || Math.ceil(allMarkdownRemark.totalCount / 10)
+  const totalPage =
+    props.pathContext.totalPage || Math.ceil(allMarkdownRemark.totalCount / 10)
   const userInformation = {
     name: siteMetadata.name,
     bio: siteMetadata.bio,
@@ -100,7 +103,10 @@ const IndexPage = (props) => {
         <title>{siteMetadata.SEOTitle}</title>
         <meta name="keyword" content={siteMetadata.keyword} />
         <meta name="description" content={siteMetadata.description} />
-        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
       </Helmet>
       <Header
         title={siteMetadata.name}
@@ -138,7 +144,7 @@ export default IndexPage
 
 export const query = graphql`
   query IndexQuery {
-    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       totalCount
       edges {
         node {
@@ -158,7 +164,7 @@ export const query = graphql`
     }
     site {
       siteMetadata {
-  			name
+        name
         bio
         avatar
         defaultAuthor

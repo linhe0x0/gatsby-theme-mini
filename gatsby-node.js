@@ -6,7 +6,7 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
 
   if (node.internal.type !== 'MarkdownRemark') return
 
-  const slug = createFilePath({ node, getNode})
+  const slug = createFilePath({ node, getNode })
 
   createNodeField({
     node,
@@ -20,7 +20,7 @@ const createPaginationPage = ({ edges, totalCount }, createPage) => {
   const totalPage = Math.ceil(totalCount / per_page)
 
   if (totalPage > 1) {
-    for (let i = 1; i <= totalPage; i ++) {
+    for (let i = 1; i <= totalPage; i++) {
       const start = (i - 1) * per_page
       const end = Math.min(i * per_page, totalCount)
 
@@ -63,7 +63,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
           totalCount
           edges {
             node {

@@ -24,11 +24,11 @@ const PostBlock = ({ title, edges }) => {
   return (
     <div id={title} className="post-block">
       <div className="post-block__heading">
-        <span className="fa fa-tag post-block__listing-seperator"><span className="post-block__title">{title}</span></span>
+        <span className="fa fa-tag post-block__listing-seperator">
+          <span className="post-block__title">{title}</span>
+        </span>
       </div>
-      <div className="post-block__body">
-        {Posts}
-      </div>
+      <div className="post-block__body">{Posts}</div>
     </div>
   )
 }

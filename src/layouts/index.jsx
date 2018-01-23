@@ -4,24 +4,26 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Analytics from '../components/Analytics'
 
-const Layout = (props) => {
-  const { navbar, aboutPage, friends, externalItemOfFooter, contact, analytics } = props.data.site.siteMetadata
+const Layout = props => {
+  const {
+    navbar,
+    aboutPage,
+    friends,
+    externalItemOfFooter,
+    contact,
+    analytics,
+  } = props.data.site.siteMetadata
 
   return (
     <div>
-      <Navbar
-        {...navbar}
-        showAboutPage={aboutPage.show}
-      />
+      <Navbar {...navbar} showAboutPage={aboutPage.show} />
       {props.children()}
       <Footer
         friends={friends}
         externalItemOfFooter={externalItemOfFooter}
         contact={contact}
       />
-      <Analytics
-        google={analytics.google}
-      />
+      <Analytics google={analytics.google} />
     </div>
   )
 }

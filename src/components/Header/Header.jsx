@@ -11,7 +11,10 @@ const Header = ({ size, title, description, bg }) => {
   }
 
   return (
-    <header className={`intro-header ${size ? 'intro-header--' + size : ''}`} style={inlineStyle}>
+    <header
+      className={`intro-header ${size ? 'intro-header--' + size : ''}`}
+      style={inlineStyle}
+    >
       <div className="container">
         <div className="text-center">
           <h1 className="intro-header__site-heading">{title}</h1>

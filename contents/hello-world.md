@@ -6,6 +6,7 @@ tags:
 cover: ""
 date: "2018-01-08"
 ---
+
 # lite
 
 [在线演示](http://blog.sqrtthree.com/)
@@ -16,8 +17,8 @@ date: "2018-01-08"
 
 安装 lite 非常容易。然而，在安装之前你需要先具备以下环境：
 
-- [Node.js](https://nodejs.org/en/)
-- [yarn](http://yarnpkg.com/)
+* [Node.js](https://nodejs.org/en/)
+* [yarn](http://yarnpkg.com/)
 
 ```shell
 git clone https://github.com/sqrthree/lite.git myblog
@@ -51,8 +52,8 @@ myblog
 
 ### 你需要关心的文件夹
 
-- config: [网站配置文件夹](#configuration)，你可以在这里设置所有的个性化配置信息。
-- contents: 你创建文章的地方。
+* config: [网站配置文件夹](#configuration)，你可以在这里设置所有的个性化配置信息。
+* contents: 你创建文章的地方。
 
 ## Scripts
 
@@ -76,27 +77,27 @@ myblog
 
 ## 配置
 
-你可以修改  [config/default.yaml](https://github.com/sqrthree/lite/blob/master/config/default.yaml) 文件来进行个性化配置。
+你可以修改 [config/default.yaml](https://github.com/sqrthree/lite/blob/master/config/default.yaml) 文件来进行个性化配置。
 
 一个更好的方案是在 `config` 中创建一个名为 `local.yaml` 文件。`local.yaml` 中的配置将会覆盖默认配置。
 
 `local.yaml` 旨在不会被版本控制系统追踪修改。
 
-有关更多的个性化配置信息请查看  [config/default.yaml](https://github.com/sqrthree/lite/blob/master/config/default.yaml)。
+有关更多的个性化配置信息请查看 [config/default.yaml](https://github.com/sqrthree/lite/blob/master/config/default.yaml)。
 
 ## 开发
 
 ### 构建于
 
-- React
-- GraphQL
-- Node.js
+* React
+* GraphQL
+* Node.js
 
 ### 前提
 
-- [Node.js](https://nodejs.org/en/)
-- [yarn](http://yarnpkg.com/)
-- [Gatsby](https://www.gatsbyjs.org/)
+* [Node.js](https://nodejs.org/en/)
+* [yarn](http://yarnpkg.com/)
+* [Gatsby](https://www.gatsbyjs.org/)
 
 ### 设置开发环境
 

@@ -8,6 +8,7 @@
 }
 .markdown-body.zh-cmn-Hans,
 .markdown-body.zh,
-.markdown-body.zh-cn, {
-  font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+.markdown-body.zh-cn {
+  font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB',
+    'Microsoft YaHei', Arial, sans-serif;
 }

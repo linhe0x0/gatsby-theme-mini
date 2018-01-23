@@ -5,7 +5,7 @@ import Link from '../Link'
 
 import './PostPreview.css'
 
-const PostPreview = (props) => {
+const PostPreview = props => {
   const postPreviewClass = classnames({
     post: true,
     [`post--${props.size}`]: props.size,
@@ -17,7 +17,9 @@ const PostPreview = (props) => {
       <Link className="post__link" to={props.path}>
         <h2 className="post__title">{props.title}</h2>
         <div className="post__content-preview">{props.excerpt}</div>
-        <p className="post__meta">{props.author} · {props.date}</p>
+        <p className="post__meta">
+          {props.author} · {props.date}
+        </p>
       </Link>
     </div>
   )

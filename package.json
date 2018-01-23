@@ -27,6 +27,7 @@
     "serve": "gatsby serve",
     "build": "gatsby build",
     "deploy": "node bin/deploy.js",
+    "lint": "prettier --list-different --write '{*.js,src/**/*.+(js|jsx|css),bin/*.js,contents/*.md}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
@@ -48,5 +49,8 @@
     "lodash": "^4.17.4",
     "react-helmet": "^5.2.0",
     "react-markdown": "^3.1.4"
+  },
+  "devDependencies": {
+    "prettier": "1.10.2"
   }
 }

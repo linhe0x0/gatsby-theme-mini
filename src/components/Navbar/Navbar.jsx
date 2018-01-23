@@ -21,7 +21,10 @@ class Navbar extends React.Component {
   }
 
   getScrollTop() {
-    return window.document.body.scrollTop || window.document.documentElement.scrollTop
+    return (
+      window.document.body.scrollTop ||
+      window.document.documentElement.scrollTop
+    )
   }
 
   handlePageScroll() {
@@ -66,23 +69,25 @@ class Navbar extends React.Component {
 
     if (showDefaultItems) {
       navItems.push(
-        (
-          <li key="navbar__item-categories" className="nav-item">
-            <Link className="nav-link" to="/categories/">categories</Link>
-          </li>
-        ),
-        (
-          <li key="navbar__item-tags" className="nav-item">
-            <Link className="nav-link" to="/tags/">Tags</Link>
-          </li>
-        )
+        <li key="navbar__item-categories" className="nav-item">
+          <Link className="nav-link" to="/categories/">
+            categories
+          </Link>
+        </li>,
+        <li key="navbar__item-tags" className="nav-item">
+          <Link className="nav-link" to="/tags/">
+            Tags
+          </Link>
+        </li>
       )
     }
 
     if (showAboutPage) {
       navItems.push(
         <li key="navbar__item-about" className="nav-item">
-          <Link className="nav-link" to="/about">about</Link>
+          <Link className="nav-link" to="/about">
+            about
+          </Link>
         </li>
       )
     }
@@ -92,13 +97,17 @@ class Navbar extends React.Component {
         if (item.to.startsWith('http')) {
           navItems.push(
             <li key={`navbar__item-${item}-${index}`} className="nav-item">
-              <a className="nav-link" href={item.to} target="_blank">{item.name}</a>
+              <a className="nav-link" href={item.to} target="_blank">
+                {item.name}
+              </a>
             </li>
           )
         } else {
           navItems.push(
             <li key={`navbar__item-${item}-${index}`} className="nav-item">
-              <Link className="nav-link" to={item.to}>{item.name}</Link>
+              <Link className="nav-link" to={item.to}>
+                {item.name}
+              </Link>
             </li>
           )
         }
@@ -106,12 +115,16 @@ class Navbar extends React.Component {
     }
 
     return (
-      <nav className={`navbar navbar-expand-sm fixed-top navbar-custom ${navbarClass}`}>
+      <nav
+        className={`navbar navbar-expand-sm fixed-top navbar-custom ${navbarClass}`}
+      >
         <div className="container">
           <div className="collapse navbar-collapse justify-content-between">
-            <Link className="navbar-brand" to="/">{brand}</Link>
+            <Link className="navbar-brand" to="/">
+              {brand}
+            </Link>
             <ul className="nav navbar-nav navbar-right text-uppercase">
-              { navItems }
+              {navItems}
             </ul>
           </div>
         </div>

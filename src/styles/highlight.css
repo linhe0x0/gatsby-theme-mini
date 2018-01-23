@@ -15,7 +15,7 @@
   padding: 0 80px;
   line-height: 38px;
   font-size: 16px;
-  font-family: 'Source Sans Pro',sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-weight: 700;
   text-indent: 15px;
   color: #fff;
@@ -26,7 +26,7 @@
   left: 20px;
   width: 12px;
   height: 12px;
-  content: " ";
+  content: ' ';
   margin-top: 13px;
   box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
   border-radius: 50%;

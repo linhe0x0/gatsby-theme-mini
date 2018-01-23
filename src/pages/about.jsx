@@ -18,12 +18,12 @@ const AboutPage = ({ data }) => {
 
   const mappedTags = {}
 
-  allMarkdownRemark.edges.forEach((item) => {
+  allMarkdownRemark.edges.forEach(item => {
     const { tags } = item.node.frontmatter
 
     if (!tags) return
 
-    tags.forEach((tag) => {
+    tags.forEach(tag => {
       if (!mappedTags[tag]) {
         mappedTags[tag] = 0
       }
@@ -32,8 +32,9 @@ const AboutPage = ({ data }) => {
     })
   })
 
-  const featuredTags = Object.keys(mappedTags).filter(item => mappedTags[item] >= siteMetadata.limitOfFeaturedTags)
-
+  const featuredTags = Object.keys(mappedTags).filter(
+    item => mappedTags[item] >= siteMetadata.limitOfFeaturedTags
+  )
 
   return (
     <div>
@@ -42,7 +43,10 @@ const AboutPage = ({ data }) => {
         <title>{`About - ${siteMetadata.SEOTitle}`}</title>
         <meta name="keyword" content={siteMetadata.keyword} />
         <meta name="description" content={siteMetadata.description} />
-        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
       </Helmet>
       <Header
         title={siteMetadata.name}
@@ -72,10 +76,9 @@ const AboutPage = ({ data }) => {
 
 export default AboutPage
 
-
 export const query = graphql`
   query AboutQuery {
-    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       totalCount
       edges {
         node {
@@ -95,7 +98,7 @@ export const query = graphql`
     }
     site {
       siteMetadata {
-  			name
+        name
         bio
         avatar
         bgOfHomeHeader

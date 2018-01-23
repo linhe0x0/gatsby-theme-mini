@@ -1,15 +1,15 @@
 import React from 'react'
 import GatsbyLink from 'gatsby-link'
 
-const Link = (props) => {
+const Link = props => {
   if (props.to) {
-    return (
-      <GatsbyLink {...props}>{ props.children }</GatsbyLink>
-    )
+    return <GatsbyLink {...props}>{props.children}</GatsbyLink>
   }
 
   return (
-    <a {...props} href="javascript:;">{ props.children }</a>
+    <a {...props} href="javascript:;">
+      {props.children}
+    </a>
   )
 }
 

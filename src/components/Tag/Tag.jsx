@@ -5,13 +5,21 @@ import classnames from 'classnames'
 
 import './Tag.css'
 
-const Tag = (props) => {
+const Tag = props => {
   let children
 
   if (props.to) {
-    children = <Link className="tag__link" to={props.to}>{props.children}</Link>
+    children = (
+      <Link className="tag__link" to={props.to}>
+        {props.children}
+      </Link>
+    )
   } else {
-    children = <a className="tag__link" href="javascript:;">{props.children}</a>
+    children = (
+      <a className="tag__link" href="javascript:;">
+        {props.children}
+      </a>
+    )
   }
 
   const tagClass = classnames({
@@ -29,7 +37,7 @@ const Tag = (props) => {
         borderColor: props['custom-color'],
       }}
     >
-      { children }
+      {children}
     </div>
   )
 }
