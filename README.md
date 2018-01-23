@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/sqrthree/MyBlog.svg?branch=master)](https://travis-ci.org/sqrthree/MyBlog)
+[![](https://david-dm.org/sqrthree/lite.svg)](https://github.com/sqrthree/lite)
+
 # lite
 
 > A clean and delicate theme for blog based on Gatsby.
