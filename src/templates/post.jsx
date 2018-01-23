@@ -95,16 +95,46 @@ const PostTemplate = ({ data, pathContext }) => {
     })`
   }
 
+  const pageTitle = `${post.frontmatter.title} - 由作者${author}发布于 ${
+    post.frontmatter.date
+  }`
+
   return (
     <div>
       <Helmet>
-        <title>
-          {post.frontmatter.title} - 由作者{author}发布于{' '}
-          {post.frontmatter.date}
-        </title>
+        <title>{pageTitle}</title>
         <link
           rel="stylesheet"
           href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css"
+        />
+        {/* Google / Search Engine Tags */}
+        <meta itemprop="name" content={pageTitle} />
+        <meta itemprop="description" content={pathContext.excerpt} />
+        <meta
+          itemprop="image"
+          content={post.frontmatter.cover || siteMetadata.thumbnail}
+        />
+
+        {/* Facebook Meta Tags */}
+        <meta
+          property="og:url"
+          content={`${siteMetadata.url}/articles${pathContext.slug}`}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pathContext.excerpt} />
+        <meta
+          property="og:image"
+          content={post.frontmatter.cover || siteMetadata.thumbnail}
+        />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pathContext.excerpt} />
+        <meta
+          name="twitter:image"
+          content={post.frontmatter.cover || siteMetadata.thumbnail}
         />
       </Helmet>
       <div className={styles['post-heading']} style={inlineStyleOfPostHeading}>
@@ -187,6 +217,8 @@ export const query = graphql`
     }
     site {
       siteMetadata {
+        url
+        thumbnail
         defaultAuthor
         donation {
           status

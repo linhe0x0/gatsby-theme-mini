@@ -12,6 +12,8 @@ language: zh-cmn-Hans # The language of your website. Use a
 SEOTitle: "title for SEO" # Only used to generate HTML <title> for SEO.
 keyword: "keyword" # The keywords of your website
 description: "description" # The description of your website
+url: "https://github.com/sqrthree/lite" # The URL of your website
+thumbnail: "" # The first thing people will see when someone shares your website. Make sure it stands out.
 
 # Site settings
 bgOfHomeHeader: "" # The background-image of your homepage.

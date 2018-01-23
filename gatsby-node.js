@@ -50,6 +50,7 @@ const createPostPage = ({ edges }, createPage) => {
       context: {
         slug: node.fields.slug,
         title: node.frontmatter.title,
+        excerpt: node.excerpt,
         prev,
         next,
       },
