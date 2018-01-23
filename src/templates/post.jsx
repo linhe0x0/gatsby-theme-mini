@@ -112,7 +112,7 @@ const PostTemplate = ({ data, pathContext }) => {
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="col-10">
-            <article className="markdown-body" dangerouslySetInnerHTML={{ __html: post.html }} />
+            <article className={`markdown-body ${siteMetadata.language}`} dangerouslySetInnerHTML={{ __html: post.html }} />
             {
               siteMetadata.donation.status && (
                 <div className={styles.donation}>

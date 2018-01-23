@@ -4,4 +4,10 @@
 .markdown-body p {
   line-height: 28px;
   text-align: justify;
+  color: #3e3e3e;
+}
+.markdown-body.zh-cmn-Hans,
+.markdown-body.zh,
+.markdown-body.zh-cn, {
+  font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
 }
