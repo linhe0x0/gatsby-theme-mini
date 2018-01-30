@@ -100,3 +100,4 @@ contents/*
 static/*
 !static/robots.txt
 !static/favicon.ico
+!static/404.svg
