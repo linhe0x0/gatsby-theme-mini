@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/sqrthree/MyBlog.svg?branch=master)](https://travis-ci.org/sqrthree/MyBlog)
 [![](https://david-dm.org/sqrthree/lite.svg)](https://github.com/sqrthree/lite)
+[![](https://img.shields.io/badge/release-0.3.0-brightgreen.svg)](https://github.com/sqrthree/lite)
 
 # lite
 
