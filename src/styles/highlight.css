@@ -1,10 +1,10 @@
-.markdown-body .highlight {
+.markdown-body .gatsby-highlight {
   position: relative;
   padding-top: 38px;
   border-radius: 6px;
   background-color: #21252b;
 }
-.markdown-body .highlight::before {
+.markdown-body .gatsby-highlight::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -20,7 +20,7 @@
   text-indent: 15px;
   color: #fff;
 }
-.markdown-body .highlight::after {
+.markdown-body .gatsby-highlight::after {
   position: absolute;
   top: 0;
   left: 20px;
@@ -32,20 +32,8 @@
   border-radius: 50%;
   background: #fc625d;
 }
-.markdown-body .highlight pre {
+.markdown-body .gatsby-highlight pre {
   background-color: #2d2d2d !important;
   color: #ccc;
   counter-reset: line-number -1;
-}
-.markdown-body .highlight pre .line {
-  line-height: 20px;
-  background-color: #2d2d2d;
-  color: #ccc;
-  counter-increment: line-number;
-}
-.markdown-body .highlight pre .line::before {
-  display: inline-block;
-  width: 30px;
-  margin-right: 8px;
-  content: counter(line-number);
 }

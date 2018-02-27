@@ -18,13 +18,7 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: 'gatsby-remark-highlights',
-            options: {
-              scopePrefix: 'syntax--',
-              codeWrap: {
-                className: 'highlight',
-              },
-            },
+            resolve: 'gatsby-remark-prismjs',
           },
         ],
       },
