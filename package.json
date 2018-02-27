@@ -26,8 +26,8 @@
     "start": "npm run develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "deploy": "node bin/deploy.js",
-    "lint": "prettier --list-different --write '{*.js,src/**/*.+(js|jsx|css),bin/*.js}'",
+    "deploy": "node scripts/deploy.js",
+    "lint": "prettier --list-different --write '{*.js,src/**/*.+(js|jsx|css),scripts/*.js}'",
     "lint:md": "prettier --list-different --write 'contents/*.md'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
