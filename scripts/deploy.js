@@ -38,6 +38,7 @@ ghpages.publish(
     branch: github.branch,
     repo: remoteURL,
     message: `:sparkles: Site updated at ${date}`,
+    dotfiles: true,
   },
   err => {
     if (err) {
