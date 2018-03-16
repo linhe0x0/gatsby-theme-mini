@@ -94,10 +94,3 @@ public/
 
 config/local.yaml
 
-contents/*
-!contents/hello-world.md
-
-static/*
-!static/robots.txt
-!static/favicon.ico
-!static/404.svg
