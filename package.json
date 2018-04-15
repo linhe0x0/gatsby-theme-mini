@@ -36,6 +36,7 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
+    "caniuse-db": "^1.0.30000830",
     "chalk": "^2.3.0",
     "classnames": "^2.2.5",
     "config": "^1.29.0",
@@ -48,6 +49,8 @@
     "gatsby-transformer-remark": "^1.7.26",
     "gh-pages": "^1.1.0",
     "lodash": "^4.17.4",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
     "react-helmet": "^5.2.0",
     "react-markdown": "^3.1.4"
   },
