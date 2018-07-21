@@ -7,7 +7,7 @@
 > A clean and delicate theme for blog based on Gatsby.
 
 - [中文介绍](./contents/hello-world.md)
-- [Live demo](http://blog.sqrtthree.com/)
+- [Live demo](https://blog.sqrtthree.com/)
 
 ## Getting started
 
