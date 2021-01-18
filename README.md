@@ -74,9 +74,9 @@ Publish your all files in `public` to a gh-pages branch on GitHub.
 
 You can modify site settings in [config/default.yaml](./config/default.yaml).
 
-A better solution is to create a local configuration file, `local.yaml`, in `config` folder. All configuration parameters from `local.yaml` will overwrite `default.yaml`.
+A better solution is to create a local configuration file, `production.yaml`, in `config` folder. All configuration parameters from `production.yaml` will overwrite `default.yaml`.
 
-`local.yaml` is intended to not be tracked in your version control system.
+`production.yaml` is intended to not be tracked in your version control system.
 
 To [config/default.yaml](https://github.com/sqrthree/little/blob/master/config/default.yaml) to get more details.
 

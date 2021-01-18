@@ -92,5 +92,4 @@ typings/
 public/
 .gatsby-context.js
 
-config/local.yaml
-
+config/production.yaml

@@ -71,9 +71,9 @@ myblog
 
 你可以修改 [config/default.yaml](https://github.com/sqrthree/little/blob/master/config/default.yaml) 文件来进行个性化配置。
 
-一个更好的方案是在 `config` 中创建一个名为 `local.yaml` 文件。`local.yaml` 中的配置将会覆盖默认配置。
+一个更好的方案是在 `config` 中创建一个名为 `production.yaml` 文件。`production.yaml` 中的配置将会覆盖默认配置。
 
-`local.yaml` 旨在不会被版本控制系统追踪修改。
+`production.yaml` 旨在不会被版本控制系统追踪修改。
 
 有关更多的个性化配置信息请查看 [config/default.yaml](https://github.com/sqrthree/little/blob/master/config/default.yaml)。
 
