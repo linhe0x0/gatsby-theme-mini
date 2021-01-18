@@ -1,74 +1,27 @@
 # Site metadata
-name: "your name"
-bio: "Hello, World." # your bio
-avatar: ""
-
-# Article
-defaultAuthor: "默认作者" # The default author of your articles, You can also set up in the source file of the specified article.
+name: 'your name' # Your name
+bio: 'Hello, World.' # Your bio
+cover: '' # Cover in Homepage
+social:
+  - name: github
+    url:
+  - name: twitter
+    url:
 
 # Site SEO
-language: zh-cmn-Hans # The language of your website. Use a
-                      # [2-lettter ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-SEOTitle: "title for SEO" # Only used to generate HTML <title> for SEO.
-keyword: "keyword" # The keywords of your website
-description: "description" # The description of your website
-url: "https://github.com/sqrthree/lite" # The URL of your website
-thumbnail: "" # The first thing people will see when someone shares your website. Make sure it stands out.
+SEOTitle: 'title for SEO' # Only used to generate HTML <title> for SEO.
+keyword: 'keyword' # The keywords of your website
+description: 'description' # The description of your website
+thumbnail: '' # The first thing people will see when someone shares your website. Make sure it stands out.
 
 # Site settings
-bgOfHomeHeader: "" # The background-image of your homepage.
-navbar:
-  showDefaultItems: true
-  brand: "首页"
-  external: # 自定义链接
-    - { name: "GitHub", to: "https://github.com/sqrthree/lite" }
-    # and more...
-
-aboutPage:
-  show: true
-  content: "
-    You can write this with Markdown.
-  "
-
-limitOfFeaturedTags: 1
-
-# SNS Link
-snsLink:
-  - { icon: "github", to: "https://github.com/sqrthree" }
-  - { icon: "twitter", to: "https://twitter.com/sqrtthree" }
-  - { icon: "weibo", to: "http://weibo.com/sqrtthree" }
-  - { text: "知", to: "https://www.zhihu.com/people/sqrtthree" }
-  - { icon: "envelope-o", to: "mailto:sqrtthree@foxmail.com" }
-  # and more...
-
-contact:
-  - { name: "Mail", value: "imsqrtthree@gmail.com" }
-  # and more...
-
-friends:
-  - { name: "GitHub", to: "https://github.com/sqrthree" }
-  - { name: "FETalk", to: "https://zhuanlan.zhihu.com/FETalk" }
-  # and more...
-
-externalItemOfFooter:
-  title: "Open Source"
-  list:
-    - { name: "GitHub", to: "https://github.com/sqrthree" }
-    # and more...
-
-donation:
-  status: true
-  channel:
-    alipay: "" # qr-code or your collect code
-    wechat: "" # qr-code or your collect code
-
-share: true # enable/disable share feature.
+favicon: ''
 
 analytics:
-  google: ""
+  google: ''
 
 deploy:
   github:
-    username: ""
-    repo: ""
+    username: ''
+    repo: ''
     branch: gh-pages

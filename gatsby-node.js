@@ -1,8 +1,9 @@
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
+const _ = require('lodash')
 
-exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
-  const { createNodeField } = boundActionCreators
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
 
   if (node.internal.type !== 'MarkdownRemark') return
 
@@ -15,66 +16,99 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   })
 }
 
-const createPaginationPage = ({ edges, totalCount }, createPage) => {
-  const per_page = 10
-  const totalPage = Math.ceil(totalCount / per_page)
+const createPaginationPage = (data, createPage) => {
+  const { totalCount, edges } = data
+  const perPage = 10
+  const pinedCount = 4
+  const pageCount = Math.ceil((totalCount - pinedCount) / perPage)
 
-  if (totalPage > 1) {
-    for (let i = 1; i <= totalPage; i++) {
-      const start = (i - 1) * per_page
-      const end = Math.min(i * per_page, totalCount)
-
-      const posts = edges.slice(start, end)
+  if (pageCount > 1) {
+    for (let i = 1; i <= pageCount; i++) {
+      const edgeList = _.slice(edges, 0, pinedCount + i * perPage)
+      const nodes = _.map(edgeList, 'node')
+      const next = _.get(_.last(edgeList), 'next')
 
       createPage({
         path: `/pages/${i}`,
         component: path.resolve('./src/pages/index.jsx'),
         context: {
-          page: i,
-          totalPage: totalPage,
-          posts,
+          pageCount,
+          perPage,
+          currentPage: i,
+          hasPreviousPage: i > 1,
+          hasNextPage: i < pageCount,
+          nodes,
+          next,
         },
       })
     }
   }
 }
 
-const createPostPage = ({ edges }, createPage) => {
-  edges.forEach(({ node }, index) => {
-    const prev = index === 0 ? false : edges[index - 1].node
-    const next = index === edges.length - 1 ? false : edges[index + 1].node
+const createPostPage = (data, createPage) => {
+  _.forEach(data.edges, item => {
+    const { previous, node, next } = item
+    const { title, cover, date } = node.frontmatter
+    const { slug } = node.fields
+    const dateString = date ? `/${_.join(_.split(date, '-'), '/')}` : ''
 
     createPage({
-      path: `/articles${node.fields.slug}`,
+      path: `/articles${dateString}${slug}`,
       component: path.resolve('./src/templates/post.jsx'),
       context: {
-        slug: node.fields.slug,
-        title: node.frontmatter.title,
+        title,
+        cover,
+        slug,
         excerpt: node.excerpt,
-        prev,
+        previous,
         next,
       },
     })
   })
 }
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     graphql(`
       {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+        allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
           totalCount
+
           edges {
-            node {
+            previous {
+              id
+              frontmatter {
+                title
+                cover
+                date
+              }
+              excerpt
               fields {
                 slug
               }
+            }
+
+            node {
+              id
               frontmatter {
                 title
-                category
                 tags
+                cover
+                date
+              }
+              excerpt
+              fields {
+                slug
+              }
+              timeToRead
+            }
+
+            next {
+              id
+              frontmatter {
+                title
                 cover
                 date
               }
@@ -87,8 +121,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       }
     `).then(result => {
-      createPaginationPage(result.data.allMarkdownRemark, createPage)
-      createPostPage(result.data.allMarkdownRemark, createPage)
+      const { allMarkdownRemark } = result.data
+
+      createPaginationPage(allMarkdownRemark, createPage)
+      createPostPage(allMarkdownRemark, createPage)
 
       resolve()
     })

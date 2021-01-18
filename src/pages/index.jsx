@@ -1,179 +1,104 @@
 import React from 'react'
-import Helmet from 'react-helmet'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import Link from '../components/Link'
-import Header from '../components/Header'
-import PostPreview from '../components/PostPreview'
-import Sidebar from '../components/Sidebar'
+import { graphql, Link } from 'gatsby'
+import _ from 'lodash'
 
-const Pagination = ({ page, totalPage }) => {
-  const hasPrevPage = page > 1
-  const hasNextPage = page < totalPage
-
-  if (!hasPrevPage && !hasNextPage) return null
-
-  const prevBtnClass = classnames({
-    'page-item': true,
-    disabled: !hasPrevPage,
-  })
-
-  const nextBtnClass = classnames({
-    'page-item': true,
-    disabled: !hasNextPage,
-  })
-
-  return (
-    <nav className="mt-4">
-      <ul className="pagination justify-content-end">
-        <li className={prevBtnClass}>
-          <Link
-            className="page-link"
-            to={hasPrevPage ? `/pages/${page - 1}` : null}
-            style={{ color: '#a3a3a3' }}
-          >
-            Previous
-          </Link>
-        </li>
-        <li className={nextBtnClass}>
-          <Link
-            className="page-link"
-            to={hasNextPage ? `/pages/${page + 1}` : null}
-            style={{ color: '#a3a3a3' }}
-          >
-            Next
-          </Link>
-        </li>
-      </ul>
-    </nav>
-  )
-}
-
-const IndexPage = props => {
-  const { allMarkdownRemark } = props.data
-
-  if (!allMarkdownRemark) return null
-
-  const { siteMetadata } = props.data.site
-  const edges = props.pathContext.posts || allMarkdownRemark.edges.slice(0, 10)
-
-  const Posts = edges.map((item, index) => (
-    <PostPreview
-      key={`${item}-${index}`}
-      title={item.node.frontmatter.title}
-      author={siteMetadata.defaultAuthor}
-      date={item.node.frontmatter.date}
-      excerpt={item.node.excerpt}
-      path={`/articles${item.node.fields.slug}`}
-    />
-  ))
-
-  const mappedTags = {}
-
-  allMarkdownRemark.edges.forEach(item => {
-    const { tags } = item.node.frontmatter
-
-    if (!tags) return
-
-    tags.forEach(tag => {
-      if (!mappedTags[tag]) {
-        mappedTags[tag] = 0
-      }
-
-      mappedTags[tag] += 1
-    })
-  })
-
-  const featuredTags = Object.keys(mappedTags).filter(
-    item => mappedTags[item] >= siteMetadata.limitOfFeaturedTags
-  )
-
-  const totalPage =
-    props.pathContext.totalPage || Math.ceil(allMarkdownRemark.totalCount / 10)
-  const userInformation = {
-    name: siteMetadata.name,
-    bio: siteMetadata.bio,
-    avatar: siteMetadata.avatar,
-  }
-
-  return (
-    <div>
-      <Helmet>
-        <title>{siteMetadata.SEOTitle}</title>
-      </Helmet>
-      <Header
-        title={siteMetadata.name}
-        description={siteMetadata.bio}
-        bg={siteMetadata.bgOfHomeHeader}
-      />
-      <div className="main-container">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9">
-              {Posts}
-              {
-                <Pagination
-                  page={props.pathContext.page || 1}
-                  totalPage={totalPage}
-                />
-              }
-            </div>
-            <div className="col-md-3">
-              <Sidebar
-                featuredTags={featuredTags}
-                userInformation={userInformation}
-                snsLink={siteMetadata.snsLink}
-                friends={siteMetadata.friends}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default IndexPage
+import Layout from '../components/Layout'
+import PageHeader from '../components/PageHeader'
+import PostWall from '../components/PostWall'
+import PostList from '../components/PostList'
 
 export const query = graphql`
-  query IndexQuery {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      totalCount
-      edges {
-        node {
-          frontmatter {
-            title
-            category
-            tags
-            cover
-            date
-          }
-          excerpt
-          fields {
-            slug
-          }
-        }
-      }
-    }
+  query HomePageQuery {
     site {
       siteMetadata {
         name
         bio
-        avatar
-        defaultAuthor
-        bgOfHomeHeader
+        cover
+
         SEOTitle
-        limitOfFeaturedTags
-        snsLink {
-          icon
-          text
-          to
+      }
+    }
+
+    allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
+      limit: 14
+    ) {
+      pageInfo {
+        totalCount
+        pageCount
+        perPage
+        hasPreviousPage
+        hasNextPage
+        currentPage
+      }
+
+      nodes {
+        id
+        frontmatter {
+          title
+          tags
+          cover
+          date
         }
-        friends {
-          name
-          to
+        excerpt
+        fields {
+          slug
         }
+        timeToRead
       }
     }
   }
 `
+
+export default function HomePage(props) {
+  const { data, pageContext } = props
+  const { siteMetadata } = data.site
+  const { pageInfo } = data.allMarkdownRemark
+  const nodes = pageContext.nodes || data.allMarkdownRemark.nodes
+  const hasNextPage = pageContext.nodes
+    ? pageContext.hasNextPage
+    : pageInfo.hasNextPage
+  const currentPage = pageContext.nodes
+    ? pageContext.currentPage
+    : pageInfo.currentPage
+
+  const pinedCount = 4
+  const pinedPosts = _.slice(data.allMarkdownRemark.nodes, 0, pinedCount)
+  const posts = _.slice(nodes, pinedCount)
+
+  return (
+    <Layout>
+      <PageHeader
+        title={siteMetadata.name}
+        description={siteMetadata.bio}
+        cover={siteMetadata.cover}
+      />
+      <PostWall posts={pinedPosts} />
+      <div className="bg-blue-50 p-40">
+        <div className="container mx-auto">
+          <PostList posts={posts} />
+          {hasNextPage ? (
+            <div className="mt-8 flex justify-center">
+              <Link
+                className="py-2 px-6"
+                to={`/pages/${currentPage + 1}#page-${currentPage + 1}`}
+              >
+                <svg
+                  className="animate-bounce w-6 h-6 text-amber-900"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </Link>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </Layout>
+  )
+}

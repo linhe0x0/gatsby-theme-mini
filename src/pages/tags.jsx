@@ -1,98 +1,84 @@
 import React from 'react'
-import Helmet from 'react-helmet'
-import Header from '../components/Header'
-import Link from '../components/Link'
-import TagCloud from '../components/TagCloud'
-import PostBlock from '../components/PostBlock'
+import _ from 'lodash'
+import { Link } from 'gatsby'
 
-const TagPage = ({ data }) => {
-  if (!data.allMarkdownRemark) return null
-
-  const mappedTags = {}
-
-  data.allMarkdownRemark.edges.forEach(item => {
-    const { tags } = item.node.frontmatter
-
-    if (!tags) return
-
-    tags.forEach(tag => {
-      if (!mappedTags[tag]) {
-        mappedTags[tag] = []
-      }
-
-      mappedTags[tag].push(item)
-    })
-  })
-
-  const PostBlockList = Object.keys(mappedTags).map((item, index) => {
-    return (
-      <PostBlock
-        key={`${item}-${index}`}
-        title={item}
-        edges={mappedTags[item]}
-      />
-    )
-  })
-
-  const { siteMetadata } = data.site
-
-  return (
-    <div>
-      <Helmet>
-        <title>{`Tags - ${siteMetadata.SEOTitle}`}</title>
-        <link
-          rel="stylesheet"
-          href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-      </Helmet>
-      <Header
-        title="Tags"
-        description={siteMetadata.bio}
-        bg={siteMetadata.bgOfHomeHeader}
-        size="small"
-      />
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-8">
-            <TagCloud dataSource={Object.keys(mappedTags)} />
-            {PostBlockList}
-          </div>
-        </div>
-      </div>
-      <br />
-    </div>
-  )
-}
-
-export default TagPage
+import Layout from '../components/Layout'
+import PageHeader from '../components/PageHeader'
+import TagList from '../components/TagList'
+import { getPermalink } from '../helpers/permalink'
 
 export const query = graphql`
-  query TagsQuery {
+  query TagQuery {
     allMarkdownRemark {
-      edges {
-        node {
-          frontmatter {
-            title
-            category
-            tags
-            cover
-            date
-          }
-          excerpt
-          fields {
-            slug
-          }
+      nodes {
+        id
+        frontmatter {
+          title
+          tags
+          date
         }
-      }
-    }
-    site {
-      siteMetadata {
-        name
-        bio
-        avatar
-        bgOfHomeHeader
-        SEOTitle
+        excerpt
+        fields {
+          slug
+        }
       }
     }
   }
 `
+
+export default function TagPage(props) {
+  const { data } = props
+  const { nodes } = data.allMarkdownRemark
+
+  const tags = _.uniq(
+    _.flatMap(nodes, item => _.get(item, 'frontmatter.tags') || [])
+  )
+  const postGroups = _.groupBy(
+    _.flatMap(nodes, item => {
+      return _.map(_.get(item, 'frontmatter.tags'), tag =>
+        _.assign({}, item, {
+          tag,
+        })
+      )
+    }),
+    'tag'
+  )
+
+  return (
+    <Layout>
+      <PageHeader size="small" title="# Tags #" />
+      <div className="container mx-auto max-w-screen-lg py-12 mb-10">
+        <div className="relative z-10">
+          <TagList tags={tags} />
+        </div>
+        <div className="my-4 flex flex-col space-y-4">
+          {_.map(postGroups, (posts, tag) => (
+            <div key={tag}>
+              <div id={`tag-${tag}`} className="pt-16 -mt-16">
+                <div className="mt-6 mb-2">
+                  <h2 className="text-xl text-indigo-600">
+                    <Link to={`#tag-${tag}`}>{tag}</Link>
+                  </h2>
+                </div>
+                <ul className="relative z-10 divide-y divide-gray-100">
+                  {posts.map(post => (
+                    <li key={post.id} className="py-4">
+                      <Link to={getPermalink(post)}>
+                        <h3 className="text-lg mb-2">
+                          {post.frontmatter.title}
+                        </h3>
+                        <p className="container max-w-screen-lg text-sm truncate text-gray-600 hover:text-gray-800">
+                          {post.excerpt}
+                        </p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Layout>
+  )
+}

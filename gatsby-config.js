@@ -5,12 +5,13 @@ const siteMetadata = config.util.loadFileConfigs()
 module.exports = {
   siteMetadata,
   plugins: [
+    'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'post',
-        path: `${__dirname}/contents`,
+        path: `${__dirname}/posts`,
       },
     },
     {

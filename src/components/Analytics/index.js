@@ -1,18 +1,20 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
-const Analytics = ({ google }) => {
-  const Ga = []
+export default function Analytics(props) {
+  const { google } = props
+  const ga = []
 
   if (google) {
-    Ga.push(
+    ga.push(
       <script
         key="ga-script-1"
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${google}`}
       />
     )
-    Ga.push(
+    ga.push(
       <script key="ga-script-2">
         {`
         window.dataLayer = window.dataLayer || [];
@@ -25,7 +27,9 @@ const Analytics = ({ google }) => {
     )
   }
 
-  return <Helmet>{google && Ga}</Helmet>
+  return <Helmet>{google && ga}</Helmet>
 }
 
-export default Analytics
+Analytics.propTypes = {
+  google: PropTypes.string.isRequired,
+}

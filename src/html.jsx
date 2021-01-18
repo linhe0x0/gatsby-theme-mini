@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 let inlinedStyles = ''
 
 if (process.env.NODE_ENV === 'production') {
@@ -10,8 +10,16 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
-const HTML = ({ headComponents, body, postBodyComponents }) => {
-  let css
+export default function HTML(props) {
+  const {
+    htmlAttributes,
+    headComponents,
+    preBodyComponents,
+    body,
+    postBodyComponents,
+  } = props
+
+  let css = ''
 
   if (process.env.NODE_ENV === 'production') {
     css = (
@@ -23,18 +31,15 @@ const HTML = ({ headComponents, body, postBodyComponents }) => {
   }
 
   return (
-    <html lang="zh-hans">
+    <html {...htmlAttributes}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {headComponents}
-        <link
-          rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
-        />
         {css}
       </head>
-      <body>
+      <body {...props.bodyAttributes}>
+        {preBodyComponents}
         <div id="___gatsby" dangerouslySetInnerHTML={{ __html: body }} />
         {postBodyComponents}
       </body>
@@ -42,4 +47,11 @@ const HTML = ({ headComponents, body, postBodyComponents }) => {
   )
 }
 
-export default HTML
+HTML.propTypes = {
+  htmlAttributes: PropTypes.object,
+  headComponents: PropTypes.array,
+  bodyAttributes: PropTypes.object,
+  preBodyComponents: PropTypes.array,
+  body: PropTypes.string,
+  postBodyComponents: PropTypes.array,
+}

@@ -11,9 +11,7 @@ const { github } = config.get('deploy')
 let remoteURL = ''
 
 if (token) {
-  remoteURL = `https://${token}@github.com/${github.username}/${
-    github.repo
-  }.git`
+  remoteURL = `https://${token}@github.com/${github.username}/${github.repo}.git`
   console.log(
     `${chalk.blue(
       'info'

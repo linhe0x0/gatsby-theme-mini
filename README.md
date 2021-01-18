@@ -1,23 +1,19 @@
-[![Build Status](https://travis-ci.org/sqrthree/MyBlog.svg?branch=master)](https://travis-ci.org/sqrthree/MyBlog)
-[![](https://david-dm.org/sqrthree/lite.svg)](https://github.com/sqrthree/lite)
-[![](https://img.shields.io/badge/release-0.3.0-brightgreen.svg)](https://github.com/sqrthree/lite)
-
-# lite
+# little
 
 > A clean and delicate theme for blog based on Gatsby.
 
-- [中文介绍](./contents/hello-world.md)
+- [中文介绍](./posts/hello-world.md)
 - [Live demo](https://blog.sqrtthree.com/)
 
 ## Getting started
 
-Installing lite is quite easy. However, you do need to have a couple of other things installed first:
+Installing little is quite easy. However, you do need to have a couple of other things installed first:
 
 - [Node.js](https://nodejs.org/en/)
 - [yarn](http://yarnpkg.com/) (If you prefer yarn instead of npm)
 
 ```shell
-git clone https://github.com/sqrthree/lite.git myblog
+git clone https://github.com/sqrthree/little.git myblog
 cd myblog
 yarn install // or `npm install`
 ```
@@ -30,26 +26,27 @@ myblog
 ├── README.md
 ├── bin
 ├── config
-│   └── default.yaml
-├── contents
-│   └── hello-world.md
+│   └── default.yaml
+├── posts
+│   └── hello-world.md
+├── gatsby-browser.js
 ├── gatsby-config.js
 ├── gatsby-node.js
 ├── index.js
 ├── package.json
 ├── src
 ├── static
-│   ├── CNAME
-│   ├── README.md
-│   ├── favicon.ico
-│   └── robots.txt
+│   ├── CNAME
+│   ├── README.md
+│   ├── favicon.ico
+│   └── robots.txt
 └── yarn.lock
 ```
 
 ### All the folders you need to care about
 
 - config: [Site configuration folder](#configuration), You can configure most settings here.
-- contents: Contents folder, Where you create a new post.
+- posts: Posts folder, Where you create a new post.
 
 ## Scripts
 
@@ -57,7 +54,7 @@ myblog
 
 Start a hot-reloading development environment accessible at localhost:8000.
 
-The page will automatically reload if you make changes to the post in `contents`.
+The page will automatically reload if you make changes to the post in `posts`.
 
 You can get the build errors and lint warnings in the console.
 
@@ -75,13 +72,13 @@ Publish your all files in `public` to a gh-pages branch on GitHub.
 
 ## Configuration
 
-You can modify site settings in [config/default.yaml](https://github.com/sqrthree/lite/blob/master/config/default.yaml).
+You can modify site settings in [config/default.yaml](./config/default.yaml).
 
 A better solution is to create a local configuration file, `local.yaml`, in `config` folder. All configuration parameters from `local.yaml` will overwrite `default.yaml`.
 
 `local.yaml` is intended to not be tracked in your version control system.
 
-To [config/default.yaml](https://github.com/sqrthree/lite/blob/master/config/default.yaml) to get more details.
+To [config/default.yaml](https://github.com/sqrthree/little/blob/master/config/default.yaml) to get more details.
 
 ## Developing
 
@@ -100,8 +97,8 @@ To [config/default.yaml](https://github.com/sqrthree/lite/blob/master/config/def
 ### Setting up Dev
 
 ```shell
-git clone https://github.com/sqrthree/lite.git
-cd lite
+git clone https://github.com/sqrthree/little.git
+cd little
 yarn install
 yarn run start
 ```

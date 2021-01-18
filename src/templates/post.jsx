@@ -1,122 +1,54 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import classnames from 'classnames'
-import Tag from '../components/Tag'
-import Link from '../components/Link'
+import { graphql, Link } from 'gatsby'
 
-import styles from '../styles/post.module.css'
+import Layout from '../components/Layout'
+import TagList from '../components/TagList'
+import Icon from '../components/Icon'
+import { getPermalink } from '../helpers/permalink'
+
 import '../styles/highlight.css'
 import '../styles/markdown.css'
 
-class Share extends React.Component {
-  addShareSupport() {
-    const headElement = document.querySelector('head')
-    const linkElement = document.createElement('link')
+export const query = graphql`
+  query PostBySlug($slug: String!) {
+    site {
+      siteMetadata {
+        name
+        thumbnail
+      }
+      host
+    }
 
-    linkElement.rel = 'stylesheet'
-    linkElement.href =
-      'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css'
-
-    headElement.appendChild(linkElement)
-
-    const scriptElement = document.createElement('script')
-
-    scriptElement.src =
-      'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'
-
-    headElement.appendChild(scriptElement)
+    markdownRemark(fields: { slug: { eq: $slug } }) {
+      frontmatter {
+        title
+        tags
+        cover
+        date
+      }
+      excerpt
+      html
+    }
   }
+`
 
-  addHighlightSupport() {
-    const headElement = document.querySelector('head')
-    const linkElement = document.createElement('link')
-
-    linkElement.rel = 'stylesheet'
-    linkElement.href =
-      'https://cdnjs.cloudflare.com/ajax/libs/prism/1.11.0/themes/prism-okaidia.min.css'
-
-    headElement.appendChild(linkElement)
-  }
-
-  componentDidMount() {
-    this.addHighlightSupport()
-    this.addShareSupport()
-  }
-
-  render() {
-    return <div className="social-share" data-disabled="diandian" />
-  }
-}
-
-const Pager = ({ prev, next }) => {
-  const prevBtnClass = classnames({
-    [styles.pager__item]: true,
-    [styles['pager__item--prev']]: true,
-    [styles['pager__item--disabled']]: !prev,
-  })
-
-  const nextBtnClass = classnames({
-    [styles.pager__item]: true,
-    [styles['pager__item--next']]: true,
-    [styles['pager__item--disabled']]: !next,
-  })
-
-  return (
-    <ul
-      className={`${
-        styles.pager
-      } row justify-content-between text-center list-inline`}
-    >
-      <li className="col list-inline-item">
-        <Link
-          className={prevBtnClass}
-          to={prev ? `/articles${prev.fields.slug}` : null}
-          title={prev ? prev.frontmatter.title : '已经是第一篇啦 ^_^'}
-        >
-          <div className={`${styles.pager__title}`}>Previous</div>
-          <p className={`${styles.pager__tips}`}>
-            {prev ? prev.frontmatter.title : '已经是第一篇啦 ^_^ '}
-          </p>
-        </Link>
-      </li>
-      <li className="col list-inline-item">
-        <Link
-          className={nextBtnClass}
-          to={next ? `/articles${next.fields.slug}` : null}
-          title={next ? next.frontmatter.title : '已经是最后一篇啦 ^_^'}
-        >
-          <div className={`${styles.pager__title}`}>Next</div>
-          <p className={`${styles.pager__tips}`}>
-            {next ? next.frontmatter.title : '已经是最后一篇啦 ^_^'}
-          </p>
-        </Link>
-      </li>
-    </ul>
-  )
-}
-
-const PostTemplate = ({ data, pathContext }) => {
+export default function PostTemplate(props) {
+  const { data, pageContext } = props
+  const { siteMetadata, host } = data.site
   const post = data.markdownRemark
-  const { siteMetadata } = data.site
-
   const tags = post.frontmatter.tags || []
-
-  const author = post.frontmatter.author || siteMetadata.defaultAuthor
 
   const inlineStyleOfPostHeading = {}
 
   if (post.frontmatter.cover) {
-    inlineStyleOfPostHeading['backgroundImage'] = `url(${
-      post.frontmatter.cover
-    })`
+    inlineStyleOfPostHeading.backgroundImage = `url(${post.frontmatter.cover})`
   }
 
-  const pageTitle = `${post.frontmatter.title} - 由作者${author}发布于 ${
-    post.frontmatter.date
-  }`
+  const pageTitle = `${post.frontmatter.title} - 由作者${siteMetadata.name}发布于 ${post.frontmatter.date}`
 
   return (
-    <div>
+    <Layout>
       <Helmet>
         <title>{pageTitle}</title>
         <link
@@ -124,127 +56,141 @@ const PostTemplate = ({ data, pathContext }) => {
           href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css"
         />
         {/* Google / Search Engine Tags */}
-        <meta itemprop="name" content={pageTitle} />
-        <meta itemprop="description" content={pathContext.excerpt} />
+        <meta itemProp="name" content={pageTitle} />
+        <meta itemProp="description" content={pageContext.excerpt} />
         <meta
-          itemprop="image"
+          itemProp="image"
           content={post.frontmatter.cover || siteMetadata.thumbnail}
         />
-
         {/* Facebook Meta Tags */}
         <meta
           property="og:url"
-          content={`${siteMetadata.url}/articles${pathContext.slug}`}
+          content={`${host}/articles${pageContext.slug}`}
         />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pathContext.excerpt} />
+        <meta property="og:description" content={pageContext.excerpt} />
         <meta
           property="og:image"
           content={post.frontmatter.cover || siteMetadata.thumbnail}
         />
-
         {/* Twitter Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={pathContext.excerpt} />
+        <meta name="twitter:description" content={pageContext.excerpt} />
         <meta
           name="twitter:image"
           content={post.frontmatter.cover || siteMetadata.thumbnail}
         />
       </Helmet>
-      <div className={styles['post-heading']} style={inlineStyleOfPostHeading}>
-        <div className="container">
-          <div className="row justify-content-md-center">
-            <div className="col-10">
-              <div className="tags ghost-tags">
-                {tags.map(tag => (
-                  <Tag key={tag} to={`/tags#${tag}`} theme="white" full>
-                    {tag}
-                  </Tag>
-                ))}
-              </div>
-              <h1 className={styles['post-heading__title']}>
-                {post.frontmatter.title}
-              </h1>
-              <p className={styles['post-heading__meta']}>
-                {author} · {post.frontmatter.date}
-              </p>
+      <div className="py-36 bg-gray-50" style={inlineStyleOfPostHeading}>
+        <div className="container mx-auto">
+          <TagList tags={tags} />
+          <h1 className="py-6 text-5xl font-extrabold text-gray-900">
+            {post.frontmatter.title}
+          </h1>
+          <div className="flex items-center">
+            <div className="mr-4 text-xl text-gray-800">
+              {siteMetadata.name}
+            </div>
+            <div className="text-base text-gray-500">
+              {post.frontmatter.date}
             </div>
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="row justify-content-md-center">
-          <div className="col-10">
-            <article
-              className={`markdown-body ${siteMetadata.language}`}
-              dangerouslySetInnerHTML={{ __html: post.html }}
-            />
-            {siteMetadata.donation.status && (
-              <div className={styles.donation}>
-                <h3 className="mb-3">您的鼓励是作者写作最大的动力</h3>
-                <p>
-                  如果您认为本网站的文章质量不错，读后觉得收获很大，不妨请我喝杯咖啡，让我有动力继续写出高质量的文章。
-                </p>
-                {siteMetadata.donation.channel.alipay && (
-                  <a
-                    href={siteMetadata.donation.channel.alipay}
-                    className="btn btn-primary mr-2"
-                    target="_blank"
+      <div className="container max-w-screen-lg mx-auto py-20">
+        <article
+          className="markdown-body"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
+      </div>
+      <div className="pt-24 pb-32 bg-gray-50">
+        <div className="flex overflow-hidden -my-8">
+          <ul className="flex items-center w-full py-8">
+            <li className="px-3 flex-none w-1/3 transform scale-90 rotate-2 hover:rotate-0">
+              {pageContext.previous ? (
+                <Link to={getPermalink(pageContext.previous)}>
+                  <figure className="shadow-lg rounded-xl flex-none">
+                    <blockquote className="rounded-t-xl bg-white px-10 py-10 text-xl font-semibold text-gray-900">
+                      <svg
+                        width="45"
+                        height="36"
+                        className="mb-5 fill-current text-green-400"
+                      >
+                        <path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path>
+                      </svg>
+                      <p className="h-20 overflow-hidden text-lg text-gray-600 font-normal">
+                        {pageContext.previous.excerpt}
+                      </p>
+                    </blockquote>
+                    <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-green-400 to-blue-400">
+                      <div className="flex-auto text-2xl truncate">
+                        {pageContext.previous.frontmatter.title}
+                      </div>
+                      <div className="flex-none text-white">
+                        <Icon type="right" />
+                      </div>
+                    </figcaption>
+                  </figure>
+                </Link>
+              ) : null}
+            </li>
+            <li className="px-3 flex-none w-1/3 transform -rotate-1">
+              <figure className="shadow-lg rounded-xl flex-none">
+                <blockquote className="rounded-t-xl bg-white px-10 py-10 text-xl font-semibold text-gray-900">
+                  <svg
+                    width="45"
+                    height="36"
+                    className="mb-5 fill-current text-blue-400"
                   >
-                    支付宝打赏
-                  </a>
-                )}
-                {siteMetadata.donation.channel.wechat && (
-                  <a
-                    href={siteMetadata.donation.channel.wechat}
-                    className="btn btn-success"
-                    target="_blank"
-                  >
-                    微信打赏
-                  </a>
-                )}
-              </div>
-            )}
-            {siteMetadata.share && <Share />}
-            <hr />
-            <Pager prev={pathContext.prev} next={pathContext.next} />
-          </div>
+                    <path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path>
+                  </svg>
+                  <p className="h-20 overflow-hidden text-lg text-gray-600 font-normal">
+                    {post.excerpt}
+                  </p>
+                </blockquote>
+                <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-blue-400 to-purple-400">
+                  <div className="flex-auto text-2xl truncate">
+                    {post.frontmatter.title}
+                  </div>
+                  <div className="flex-none text-white">
+                    <Icon type="right" />
+                  </div>
+                </figcaption>
+              </figure>
+            </li>
+            <li className="px-3 flex-none w-1/3 transform scale-90 rotate-1 hover:rotate-0">
+              {pageContext.next ? (
+                <Link to={getPermalink(pageContext.next)}>
+                  <figure className="shadow-lg rounded-xl flex-none">
+                    <blockquote className="rounded-t-xl bg-white px-10 py-10 text-xl font-semibold text-gray-900">
+                      <svg
+                        width="45"
+                        height="36"
+                        className="mb-5 fill-current text-purple-400"
+                      >
+                        <path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path>
+                      </svg>
+                      <p className="h-20 overflow-hidden text-lg text-gray-600 font-normal">
+                        {pageContext.next.excerpt}
+                      </p>
+                    </blockquote>
+                    <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-purple-400 to-pink-500">
+                      <div className="flex-auto text-2xl truncate">
+                        {pageContext.next.frontmatter.title}
+                      </div>
+                      <div className="flex-none text-white">
+                        <Icon type="right" />
+                      </div>
+                    </figcaption>
+                  </figure>
+                </Link>
+              ) : null}
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }
-
-export default PostTemplate
-
-export const query = graphql`
-  query PostBySlug($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
-      frontmatter {
-        title
-        date
-        category
-        tags
-        cover
-      }
-    }
-    site {
-      siteMetadata {
-        url
-        thumbnail
-        defaultAuthor
-        donation {
-          status
-          channel {
-            alipay
-            wechat
-          }
-        }
-        share
-      }
-    }
-  }
-`
