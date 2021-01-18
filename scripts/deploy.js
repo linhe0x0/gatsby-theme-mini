@@ -12,23 +12,27 @@ let remoteURL = ''
 
 if (token) {
   remoteURL = `https://${token}@github.com/${github.username}/${github.repo}.git`
+
   console.log(
     `${chalk.blue(
       'info'
-    )} All files will be Published in https://YOUR_TOKEN@github.com/${
+    )} All files will be published to https://YOUR_TOKEN@github.com/${
       github.username
     }/${github.repo}.git`
   )
 } else {
   remoteURL = `git@github.com:${github.username}/${github.repo}.git`
+
   console.log(
-    `${chalk.blue('info')} All files will be Published in git@github.com:${
+    `${chalk.blue('info')} All files will be published to git@github.com:${
       github.username
     }/${github.repo}.git`
   )
 }
 
 console.log(`${chalk.blue('info')} Branch: ${github.branch || 'gh-pages'}`)
+
+console.log(chalk.cyan('uploading...'))
 
 ghpages.publish(
   path.resolve(__dirname, '../public'),
@@ -38,15 +42,16 @@ ghpages.publish(
     message: `:sparkles: Site updated at ${date}`,
     dotfiles: true,
   },
-  err => {
+  (err) => {
     if (err) {
       console.error(err)
+
       process.exit(1)
     }
 
-    console.log(`${chalk.green('success')} Published.`)
+    console.log(`${chalk.green('success')} OK.`)
     console.log(
-      `${chalk.green('success')} Visit https://github.com/${github.username}/${
+      `${chalk.green('success')} Open https://github.com/${github.username}/${
         github.repo
       } to get more details.`
     )
