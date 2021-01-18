@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 
@@ -17,7 +17,6 @@ export const query = graphql`
         name
         thumbnail
       }
-      host
     }
 
     markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -35,7 +34,7 @@ export const query = graphql`
 
 export default function PostTemplate(props) {
   const { data, pageContext } = props
-  const { siteMetadata, host } = data.site
+  const { siteMetadata } = data.site
   const post = data.markdownRemark
   const tags = post.frontmatter.tags || []
 
@@ -46,6 +45,12 @@ export default function PostTemplate(props) {
   }
 
   const pageTitle = `${post.frontmatter.title} - 由作者${siteMetadata.name}发布于 ${post.frontmatter.date}`
+
+  const [pageLink, setPageLink] = useState()
+
+  useEffect(() => {
+    setPageLink(window.location.href)
+  }, [])
 
   return (
     <Layout>
@@ -63,10 +68,7 @@ export default function PostTemplate(props) {
           content={post.frontmatter.cover || siteMetadata.thumbnail}
         />
         {/* Facebook Meta Tags */}
-        <meta
-          property="og:url"
-          content={`${host}/articles${pageContext.slug}`}
-        />
+        <meta property="og:url" content={pageLink} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageContext.excerpt} />

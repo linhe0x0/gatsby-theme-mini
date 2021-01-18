@@ -1,6 +1,8 @@
 ---
 title: 'Hello World'
-category:
+tags:
+  - Hello
+cover: ''
 date: '2015-06-27'
 ---
 

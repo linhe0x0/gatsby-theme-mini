@@ -11,7 +11,6 @@ export default function Layout(props) {
   const data = useStaticQuery(graphql`
     query LayoutQuery {
       site {
-        host
         buildTime
 
         siteMetadata {
