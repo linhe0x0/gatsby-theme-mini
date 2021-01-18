@@ -5463,7 +5463,7 @@ gatsby-legacy-polyfills@^0.5.0:
   dependencies:
     core-js-compat "^3.6.5"
 
-gatsby-link@^2.2.30, gatsby-link@^2.9.0:
+gatsby-link@^2.9.0:
   version "2.9.0"
   resolved "https://registry.npm.taobao.org/gatsby-link/download/gatsby-link-2.9.0.tgz#8507653835503f554426d054ab0007174d0b6030"
   integrity sha1-hQdlODVQP1VEJtBUqwAHF00LYDA=
