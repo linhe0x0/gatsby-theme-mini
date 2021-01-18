@@ -27,7 +27,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "deploy": "node scripts/deploy.js",
+    "deploy": "cross-env NODE_ENV=production node scripts/deploy.js",
     "lint": "eslint --ext .js,jsx ./src",
     "lint:md": "prettier --list-different --write 'posts/*.md'"
   },
@@ -38,6 +38,7 @@
     "autoprefixer": "^10.2.1",
     "chalk": "^4.1.0",
     "config": "^3.3.0",
+    "cross-env": "^7.0.3",
     "gatsby": "^2.19.32",
     "gatsby-link": "^2.2.30",
     "gatsby-plugin-nprogress": "^2.1.20",
