@@ -10,6 +10,7 @@ const Footer = () => (
           <a
             href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"
             target="_blank"
+            rel="noreferrer"
           >
             &nbsp;署名-非商业性使用-禁止演绎 4.0 国际 (CC BY-NC-ND 4.0)&nbsp;
           </a>
@@ -20,13 +21,17 @@ const Footer = () => (
     <div className="bg-gray-900 py-3 text-xs text-right">
       <p className="container mx-auto text-gray-300">
         <strong className="font-normal">
-          <a href="https://github.com/sqrthree" target="_blank">
+          <a
+            href="https://github.com/sqrthree"
+            target="_blank"
+            rel="noreferrer"
+          >
             @根号三&nbsp;
           </a>
         </strong>
         <strong className="font-normal">
           Power by
-          <a href="https://www.gatsbyjs.org" target="_blank">
+          <a href="https://www.gatsbyjs.org" target="_blank" rel="noreferrer">
             &nbsp;Gatsby
           </a>
         </strong>

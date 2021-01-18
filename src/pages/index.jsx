@@ -92,7 +92,7 @@ export default function HomePage(props) {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </Link>
             </div>

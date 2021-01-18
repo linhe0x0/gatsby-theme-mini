@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 
 import Icon from '../Icon'
 
@@ -31,8 +31,13 @@ export default function Navbar(props) {
           </ul>
           <div className="flex-none">
             <div className="w-32 flex space-x-3 justify-end">
-              {social.map(item => (
-                <a key={item.url} href={item.url} target="_blank">
+              {social.map((item) => (
+                <a
+                  key={item.url}
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Icon type={item.name} />
                 </a>
               ))}
@@ -46,7 +51,12 @@ export default function Navbar(props) {
 
 Navbar.propTypes = {
   name: PropTypes.string,
-  social: PropTypes.array,
+  social: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      url: PropTypes.string,
+    })
+  ),
 }
 
 Navbar.defaultProps = {

@@ -1,0 +1,11 @@
+{
+  "extends": ["airbnb", "airbnb/hooks", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "react/prop-types": "off",
+    "react/forbid-prop-types": "warn",
+    "import/prefer-default-export": "off",
+    "jsx-a11y/html-has-lang": "warn",
+    "react/jsx-props-no-spreading": "warn"
+  }
+}

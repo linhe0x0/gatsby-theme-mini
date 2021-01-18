@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { Link } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import Layout from '../components/Layout'
 import PageHeader from '../components/PageHeader'
@@ -31,16 +31,16 @@ export default function TagPage(props) {
   const { nodes } = data.allMarkdownRemark
 
   const tags = _.uniq(
-    _.flatMap(nodes, item => _.get(item, 'frontmatter.tags') || [])
+    _.flatMap(nodes, (item) => _.get(item, 'frontmatter.tags') || [])
   )
   const postGroups = _.groupBy(
-    _.flatMap(nodes, item => {
-      return _.map(_.get(item, 'frontmatter.tags'), tag =>
+    _.flatMap(nodes, (item) =>
+      _.map(_.get(item, 'frontmatter.tags'), (tag) =>
         _.assign({}, item, {
           tag,
         })
       )
-    }),
+    ),
     'tag'
   )
 
@@ -61,7 +61,7 @@ export default function TagPage(props) {
                   </h2>
                 </div>
                 <ul className="relative z-10 divide-y divide-gray-100">
-                  {posts.map(post => (
+                  {posts.map((post) => (
                     <li key={post.id} className="py-4">
                       <Link to={getPermalink(post)}>
                         <h3 className="text-lg mb-2">

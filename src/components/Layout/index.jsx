@@ -7,6 +7,7 @@ import Footer from '../Footer'
 import Analytics from '../Analytics'
 
 export default function Layout(props) {
+  const { children } = props
   const data = useStaticQuery(graphql`
     query LayoutQuery {
       site {
@@ -60,7 +61,7 @@ export default function Layout(props) {
         <title>{siteMetadata.SEOTitle}</title>
       </Helmet>
       <Navbar name={siteMetadata.name} social={siteMetadata.social} />
-      {props.children}
+      {children}
       <Footer />
       {siteMetadata.analytics.google ? (
         <Analytics google={siteMetadata.analytics.google} />

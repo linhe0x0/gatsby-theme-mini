@@ -49,8 +49,8 @@ export default function PostWall(props) {
           {others.map(item => (
             <Link key={item.id} to={getPermalink(item)}>
               <figure className="relative">
-                <div className="absolute w-full h-full rounded-md transform -rotate-1 bg-gradient-to-br from-blue-50 to-blue-200 "></div>
-                <div className="absolute w-full h-full rounded-md bg-gradient-to-r from-blue-50 to-white"></div>
+                <div className="absolute w-full h-full rounded-md transform -rotate-1 bg-gradient-to-br from-blue-50 to-blue-200 " />
+                <div className="absolute w-full h-full rounded-md bg-gradient-to-r from-blue-50 to-white" />
                 <div className="flex h-42">
                   <div className="relative flex-auto py-4 mx-6">
                     <h3 className="my-1 text-xl max-h-28 overflow-hidden">
