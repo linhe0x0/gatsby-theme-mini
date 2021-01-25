@@ -1,12 +1,12 @@
 # Site metadata
-name: 'your name' # Your name
+name: 'Your name' # Your name
 bio: 'Hello, World.' # Your bio
 cover: '' # Cover in Homepage
 social:
   - name: github
-    url:
+    url: ''
   - name: twitter
-    url:
+    url: ''
 
 # Site SEO
 SEOTitle: 'title for SEO' # Only used to generate HTML <title> for SEO.
