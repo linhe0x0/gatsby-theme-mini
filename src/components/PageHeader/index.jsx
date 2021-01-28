@@ -29,7 +29,7 @@ PageHeader.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   cover: PropTypes.string,
-  mini: PropTypes.boolean,
+  mini: PropTypes.bool,
 }
 
 PageHeader.defaultProps = {
