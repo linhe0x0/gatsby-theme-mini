@@ -46,7 +46,7 @@ export default function TagPage(props) {
 
   return (
     <Layout>
-      <PageHeader size="small" title="# Tags #" />
+      <PageHeader title="Say Hi to All Tags" mini />
       <div className="container mx-auto max-w-screen-lg py-12 mb-10">
         <div className="relative z-10">
           <TagList tags={tags} />

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function PageHeader(props) {
-  const { title, description, cover } = props
+  const { title, description, cover, mini } = props
 
   return (
     <div className="header relative bg-gray-50">
@@ -11,9 +11,15 @@ export default function PageHeader(props) {
           <img className="w-full h-full object-cover" src={cover} alt={cover} />
         </div>
       ) : null}
-      <div className="relative container mx-auto py-56 text-center text-gray-900">
-        <h1 className="text-6xl py-8">{title}</h1>
-        <h2 className="text-3xl font-normal">{description}</h2>
+      <div
+        className={`relative container mx-auto text-center text-gray-900 ${
+          mini ? 'py-32' : 'py-56'
+        }`}
+      >
+        <h1 className={`py-8 ${mini ? 'text-4xl' : 'text-6xl'}`}>{title}</h1>
+        <h2 className={`font-normal ${mini ? 'text-xl' : 'text-3xl'}`}>
+          {description}
+        </h2>
       </div>
     </div>
   )
@@ -23,10 +29,12 @@ PageHeader.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   cover: PropTypes.string,
+  mini: PropTypes.boolean,
 }
 
 PageHeader.defaultProps = {
   title: '',
   description: '',
   cover: '',
+  mini: false,
 }
