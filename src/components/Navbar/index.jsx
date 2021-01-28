@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
+import _ from 'lodash'
 
 import Icon from '../Icon'
 
 export default function Navbar(props) {
   const { name, social } = props
+  const [pined, setPined] = useState(false)
+
+  useEffect(() => {
+    const fn = _.debounce(() => {
+      const scrollTop = document.documentElement.scrollTop
+
+      setPined(scrollTop > 10)
+    }, 100)
+
+    window.addEventListener('scroll', fn)
+
+    return () => {
+      window.removeEventListener('scroll', fn)
+    }
+  }, [])
 
   return (
-    <nav className="fixed z-20 w-full p-4">
+    <nav
+      className={`fixed z-20 w-full transition-all duration-500 ease-in-out ${
+        pined ? 'bg-white shadow-md py-3' : 'py-6'
+      }`}
+    >
       <div className="container mx-auto max-w-screen-lg">
         <div className="flex items-center">
           <div className="flex-none w-32 text-gray-900 font-bold">
@@ -31,9 +51,9 @@ export default function Navbar(props) {
           </ul>
           <div className="flex-none">
             <div className="w-32 flex space-x-3 justify-end">
-              {social.map((item) => (
+              {social.map((item, index) => (
                 <a
-                  key={item.url}
+                  key={item.url || index}
                   href={item.url}
                   target="_blank"
                   rel="noreferrer"
