@@ -8,8 +8,8 @@ export default function PostList(props) {
   const { posts } = props
 
   return (
-    <div className="flex flex-col space-y-10 bg-blue-50">
-      {posts.map(item => (
+    <div className="flex flex-col space-y-10">
+      {posts.map((item) => (
         <PostCard
           key={item.id}
           id={item.id}

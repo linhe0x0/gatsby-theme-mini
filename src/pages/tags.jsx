@@ -62,7 +62,7 @@ export default function TagPage(props) {
                 </div>
                 <ul className="relative z-10 divide-y divide-gray-100">
                   {posts.map((post) => (
-                    <li key={post.id} className="py-4">
+                    <li key={post.id} className="py-4 pl-4">
                       <Link to={getPermalink(post)}>
                         <h3 className="text-lg mb-2">
                           {post.frontmatter.title}

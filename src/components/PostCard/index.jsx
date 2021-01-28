@@ -9,12 +9,9 @@ export default function PostCard(props) {
   const { id, title, tags, cover, date, excerpt, path } = props
 
   return (
-    <figure
-      id={id}
-      className="flex h-56 rounded-md bg-gradient-to-r from-blue-50 to-white select-none"
-    >
+    <figure id={id} className="flex h-60 rounded shadow bg-white select-none">
       <Link className="flex-none block" to={path}>
-        <div className="w-72 h-full bg-gradient-to-l from-blue-50 to-white rounded-l-md overflow-hidden">
+        <div className="w-72 h-full bg-gray-50 rounded-l-md overflow-hidden">
           {cover ? (
             <img
               className="w-full h-full object-cover transition duration-500 ease-in-out transform hover:scale-110"
@@ -24,13 +21,15 @@ export default function PostCard(props) {
           ) : null}
         </div>
       </Link>
-      <div className="relative flex-auto py-4 mx-8">
-        <figcaption className="text-sm">
-          <p className="text-gray-600 text-right">{date}</p>
-        </figcaption>
-        <TagList tags={tags} />
+      <div className="relative flex-auto pt-6 pb-4 mx-8">
+        <div className="flex items-center	justify-between">
+          <TagList tags={tags} />
+          <figcaption className="text-sm">
+            <p className="text-gray-600 text-right">{date}</p>
+          </figcaption>
+        </div>
         <Link className="block" to={path}>
-          <h3 className="my-4 text-2xl">{title}</h3>
+          <h3 className="my-5 text-2xl">{title}</h3>
           <p className="mt-2 h-12 overflow-hidden text-base text-gray-800">
             {excerpt}
           </p>

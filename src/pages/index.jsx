@@ -74,7 +74,7 @@ export default function HomePage(props) {
         cover={siteMetadata.cover}
       />
       <PostWall posts={pinedPosts} />
-      <div className="bg-blue-50 p-40">
+      <div className="p-40 bg-yellow-50 bg-opacity-50">
         <div className="container mx-auto">
           <PostList posts={posts} />
           {hasNextPage ? (
