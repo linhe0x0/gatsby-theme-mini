@@ -9,9 +9,9 @@ export default function PostCard(props) {
   const { id, title, tags, cover, date, excerpt, path } = props
 
   return (
-    <figure id={id} className="flex h-60 rounded shadow bg-white select-none">
+    <figure id={id} className="md:flex rounded shadow bg-white select-none">
       <Link className="flex-none block" to={path}>
-        <div className="w-72 h-full bg-gray-50 rounded-l-md overflow-hidden">
+        <div className="w-full md:w-72 h-full bg-yellow-300 rounded-t-md md:rounded-t-none md:rounded-l-md overflow-hidden">
           {cover ? (
             <img
               className="w-full h-full object-cover transition duration-500 ease-in-out transform hover:scale-110"
@@ -21,16 +21,16 @@ export default function PostCard(props) {
           ) : null}
         </div>
       </Link>
-      <div className="relative flex-auto pt-6 pb-4 mx-8">
-        <div className="flex items-center	justify-between">
+      <div className="relative flex-auto pt-5 pb-4 mx-4 md:mx-8">
+        <div className="flex items-center	justify-between flex-wrap">
           <TagList tags={tags} />
-          <figcaption className="text-sm">
+          <figcaption className="text-sm my-1">
             <p className="text-gray-600 text-right">{date}</p>
           </figcaption>
         </div>
-        <Link className="block" to={path}>
-          <h3 className="my-5 text-2xl">{title}</h3>
-          <p className="mt-2 h-12 overflow-hidden text-base text-gray-800">
+        <Link className="block pb-12" to={path}>
+          <h3 className="my-5 text-xl md:text-2xl">{title}</h3>
+          <p className="mt-2 h-12 overflow-hidden text-base text-gray-600">
             {excerpt}
           </p>
         </Link>

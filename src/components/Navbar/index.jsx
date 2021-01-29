@@ -29,7 +29,7 @@ export default function Navbar(props) {
         pined ? 'bg-white shadow-md py-3' : 'py-6'
       }`}
     >
-      <div className="container mx-auto max-w-screen-lg">
+      <div className="container mx-auto px-8">
         <div className="flex items-center">
           <div className="flex-none w-32 text-gray-900 font-bold">
             <Link to="/">{name}</Link>

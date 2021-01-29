@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => (
   <footer>
-    <div className="bg-black py-16">
+    <div className="bg-black px-4 py-16">
       <div className="container mx-auto text-gray-200">
         <h6 className="text-lg">内容许可</h6>
         <p className="py-2 text-sm">
@@ -18,7 +18,7 @@ const Footer = () => (
         </p>
       </div>
     </div>
-    <div className="bg-gray-900 py-3 text-xs text-right">
+    <div className="bg-gray-900 px-4 py-3 text-xs text-right">
       <p className="container mx-auto text-gray-300">
         <strong className="font-normal">
           <a

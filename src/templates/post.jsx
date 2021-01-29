@@ -85,7 +85,10 @@ export default function PostTemplate(props) {
           content={post.frontmatter.cover || siteMetadata.thumbnail}
         />
       </Helmet>
-      <div className="py-36 bg-gray-50" style={inlineStyleOfPostHeading}>
+      <div
+        className="px-4 md:px-0 pt-36 pb-16 md:pb-36 bg-gray-50"
+        style={inlineStyleOfPostHeading}
+      >
         <div className="container mx-auto">
           <TagList tags={tags} />
           <h1 className="py-6 text-5xl font-extrabold text-gray-900">
@@ -101,16 +104,16 @@ export default function PostTemplate(props) {
           </div>
         </div>
       </div>
-      <div className="container max-w-screen-lg mx-auto py-20">
+      <div className="container mx-auto px-4 py-10 md:py-20">
         <article
           className="markdown-body"
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
       </div>
-      <div className="pt-24 pb-32 bg-gray-50">
+      <div className="pt-12 md:pt-24 pb-24 md:pb-32 bg-gray-50">
         <div className="flex overflow-hidden -my-8">
-          <ul className="flex items-center w-full py-8">
-            <li className="px-3 flex-none w-1/3 transform scale-90 rotate-2 hover:rotate-0">
+          <ul className="md:flex items-center w-full py-8">
+            <li className="px-3 flex-none md:w-1/3 transform scale-90 rotate-2 hover:rotate-0">
               {pageContext.previous ? (
                 <Link to={getPermalink(pageContext.previous)}>
                   <figure className="shadow-lg rounded-xl flex-none">
@@ -127,7 +130,7 @@ export default function PostTemplate(props) {
                       </p>
                     </blockquote>
                     <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-green-400 to-blue-400">
-                      <div className="flex-auto text-2xl truncate">
+                      <div className="flex-auto text-lg md:text-xl lg:text-2xl truncate">
                         {pageContext.previous.frontmatter.title}
                       </div>
                       <div className="flex-none text-white">
@@ -138,7 +141,7 @@ export default function PostTemplate(props) {
                 </Link>
               ) : null}
             </li>
-            <li className="px-3 flex-none w-1/3 transform -rotate-1">
+            <li className="hidden md:block px-3 flex-none md:w-1/3 transform -rotate-1">
               <figure className="shadow-lg rounded-xl flex-none">
                 <blockquote className="rounded-t-xl bg-white px-10 py-10 text-xl font-semibold text-gray-900">
                   <svg
@@ -153,7 +156,7 @@ export default function PostTemplate(props) {
                   </p>
                 </blockquote>
                 <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-blue-400 to-purple-400">
-                  <div className="flex-auto text-2xl truncate">
+                  <div className="flex-auto text-lg md:text-xl lg:text-2xl truncate">
                     {post.frontmatter.title}
                   </div>
                   <div className="flex-none text-white">
@@ -162,7 +165,7 @@ export default function PostTemplate(props) {
                 </figcaption>
               </figure>
             </li>
-            <li className="px-3 flex-none w-1/3 transform scale-90 rotate-1 hover:rotate-0">
+            <li className="px-3 flex-none md:w-1/3 transform scale-90 rotate-1 hover:rotate-0">
               {pageContext.next ? (
                 <Link to={getPermalink(pageContext.next)}>
                   <figure className="shadow-lg rounded-xl flex-none">
@@ -179,7 +182,7 @@ export default function PostTemplate(props) {
                       </p>
                     </blockquote>
                     <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-purple-400 to-pink-500">
-                      <div className="flex-auto text-2xl truncate">
+                      <div className="flex-auto text-lg md:text-xl lg:text-2xl truncate">
                         {pageContext.next.frontmatter.title}
                       </div>
                       <div className="flex-none text-white">

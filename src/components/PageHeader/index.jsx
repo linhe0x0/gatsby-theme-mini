@@ -12,8 +12,8 @@ export default function PageHeader(props) {
         </div>
       ) : null}
       <div
-        className={`relative container mx-auto text-center text-gray-900 ${
-          mini ? 'py-32' : 'py-56'
+        className={`relative container mx-auto px-2 md:px-10 lg:px-40 text-center text-gray-900 ${
+          mini ? 'py-24 pb-10 md:py-32' : 'py-56'
         }`}
       >
         <h1 className={`py-8 ${mini ? 'text-4xl' : 'text-6xl'}`}>{title}</h1>

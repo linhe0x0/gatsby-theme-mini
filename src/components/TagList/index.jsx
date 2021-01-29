@@ -7,9 +7,9 @@ export default function TagList(props) {
   const { tags } = props
 
   return (
-    <ul className="flex space-x-2">
-      {tags.map(item => (
-        <li key={item}>
+    <ul className="flex flex-wrap -mx-1">
+      {tags.map((item) => (
+        <li key={item} className="m-1">
           <Tag>{item}</Tag>
         </li>
       ))}
