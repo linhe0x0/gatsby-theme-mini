@@ -5,7 +5,9 @@ const _ = require('lodash')
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type !== 'MarkdownRemark') return
+  if (node.internal.type !== 'MarkdownRemark') {
+    return
+  }
 
   const slug = createFilePath({ node, getNode })
 
@@ -46,7 +48,7 @@ const createPaginationPage = (data, createPage) => {
 }
 
 const createPostPage = (data, createPage) => {
-  _.forEach(data.edges, item => {
+  _.forEach(data.edges, (item) => {
     const { previous, node, next } = item
     const { title, cover, date } = node.frontmatter
     const { slug } = node.fields
@@ -70,7 +72,7 @@ const createPostPage = (data, createPage) => {
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     graphql(`
       {
         allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
@@ -120,7 +122,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-    `).then(result => {
+    `).then((result) => {
       const { allMarkdownRemark } = result.data
 
       createPaginationPage(allMarkdownRemark, createPage)

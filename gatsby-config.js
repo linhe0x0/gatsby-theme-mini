@@ -12,7 +12,8 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'post',
-        path: `${__dirname}/posts`,
+        path: `${__dirname}/posts/`,
+        ignore: [`!(md)`],
       },
     },
     {
@@ -21,6 +22,9 @@ module.exports = {
         plugins: [
           {
             resolve: 'gatsby-remark-prismjs',
+          },
+          {
+            resolve: 'gatsby-remark-copy-linked-files',
           },
         ],
       },
