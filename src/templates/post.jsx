@@ -86,7 +86,7 @@ export default function PostTemplate(props) {
         />
       </Helmet>
       <div
-        className="px-4 md:px-0 pt-36 pb-16 md:pb-36 bg-gray-50 dark:bg-gray-900"
+        className="px-4 md:px-0 pt-36 pb-16 md:pb-36 bg-gray-50 dark:bg-gray-900 bg-cover"
         style={inlineStyleOfPostHeading}
       >
         <div className="container mx-auto">
