@@ -105,7 +105,7 @@ export default function PostTemplate(props) {
         </div>
       </div>
       <div className="dark:bg-gray-900 dark:text-gray-100">
-        <div className="container mx-auto px-4 py-10 md:py-20">
+        <div className="container mx-auto px-4 py-10 md:py-20 md:px-36">
           <article
             className="markdown-body"
             dangerouslySetInnerHTML={{ __html: post.html }}
