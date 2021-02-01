@@ -6,6 +6,7 @@ module.exports = {
   siteMetadata,
   plugins: [
     'gatsby-plugin-postcss',
+    'gatsby-plugin-dark-mode',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',

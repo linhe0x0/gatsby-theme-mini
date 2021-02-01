@@ -4,7 +4,7 @@ import { graphql, Link } from 'gatsby'
 
 import Layout from '../components/Layout'
 import TagList from '../components/TagList'
-import Icon from '../components/Icon'
+import { ArrowRightCircle } from 'react-feather'
 import { getPermalink } from '../helpers/permalink'
 
 import '../styles/highlight.css'
@@ -86,38 +86,40 @@ export default function PostTemplate(props) {
         />
       </Helmet>
       <div
-        className="px-4 md:px-0 pt-36 pb-16 md:pb-36 bg-gray-50"
+        className="px-4 md:px-0 pt-36 pb-16 md:pb-36 bg-gray-50 dark:bg-gray-900"
         style={inlineStyleOfPostHeading}
       >
         <div className="container mx-auto">
           <TagList tags={tags} />
-          <h1 className="py-6 text-5xl font-extrabold text-gray-900">
+          <h1 className="py-6 text-5xl font-extrabold text-gray-900 dark:text-gray-100">
             {post.frontmatter.title}
           </h1>
           <div className="flex items-center">
-            <div className="mr-4 text-xl text-gray-800">
+            <div className="mr-4 text-base text-gray-800 dark:text-gray-300">
               {siteMetadata.name}
             </div>
-            <div className="text-base text-gray-500">
+            <div className="text-base text-gray-500 dark:text-gray-500">
               {post.frontmatter.date}
             </div>
           </div>
         </div>
       </div>
-      <div className="container mx-auto px-4 py-10 md:py-20">
-        <article
-          className="markdown-body"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
+      <div className="dark:bg-gray-900 dark:text-gray-100">
+        <div className="container mx-auto px-4 py-10 md:py-20">
+          <article
+            className="markdown-body"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
+        </div>
       </div>
-      <div className="pt-12 md:pt-24 pb-24 md:pb-32 bg-gray-50">
+      <div className="pt-12 md:pt-24 pb-24 md:pb-32 bg-gray-50 dark:bg-gray-800">
         <div className="flex overflow-hidden -my-8">
           <ul className="md:flex items-center w-full py-8">
             <li className="px-3 flex-none md:w-1/3 transform scale-90 rotate-2 hover:rotate-0">
               {pageContext.previous ? (
                 <Link to={getPermalink(pageContext.previous)}>
                   <figure className="shadow-lg rounded-xl flex-none">
-                    <blockquote className="rounded-t-xl bg-white px-10 py-10 text-xl font-semibold text-gray-900">
+                    <blockquote className="rounded-t-xl bg-white dark:bg-gray-900 px-10 py-10 text-xl font-semibold text-gray-900">
                       <svg
                         width="45"
                         height="36"
@@ -134,7 +136,7 @@ export default function PostTemplate(props) {
                         {pageContext.previous.frontmatter.title}
                       </div>
                       <div className="flex-none text-white">
-                        <Icon type="right" />
+                        <ArrowRightCircle />
                       </div>
                     </figcaption>
                   </figure>
@@ -143,7 +145,7 @@ export default function PostTemplate(props) {
             </li>
             <li className="hidden md:block px-3 flex-none md:w-1/3 transform -rotate-1">
               <figure className="shadow-lg rounded-xl flex-none">
-                <blockquote className="rounded-t-xl bg-white px-10 py-10 text-xl font-semibold text-gray-900">
+                <blockquote className="rounded-t-xl bg-white dark:bg-gray-900 px-10 py-10 text-xl font-semibold text-gray-900">
                   <svg
                     width="45"
                     height="36"
@@ -160,7 +162,7 @@ export default function PostTemplate(props) {
                     {post.frontmatter.title}
                   </div>
                   <div className="flex-none text-white">
-                    <Icon type="right" />
+                    <ArrowRightCircle />
                   </div>
                 </figcaption>
               </figure>
@@ -169,7 +171,7 @@ export default function PostTemplate(props) {
               {pageContext.next ? (
                 <Link to={getPermalink(pageContext.next)}>
                   <figure className="shadow-lg rounded-xl flex-none">
-                    <blockquote className="rounded-t-xl bg-white px-10 py-10 text-xl font-semibold text-gray-900">
+                    <blockquote className="rounded-t-xl bg-white dark:bg-gray-900 px-10 py-10 text-xl font-semibold text-gray-900">
                       <svg
                         width="45"
                         height="36"
@@ -186,7 +188,7 @@ export default function PostTemplate(props) {
                         {pageContext.next.frontmatter.title}
                       </div>
                       <div className="flex-none text-white">
-                        <Icon type="right" />
+                        <ArrowRightCircle />
                       </div>
                     </figcaption>
                   </figure>

@@ -5,14 +5,14 @@ export default function PageHeader(props) {
   const { title, description, cover, mini } = props
 
   return (
-    <div className="header relative bg-gray-50">
+    <div className="header relative bg-gray-50 dark:bg-gray-900">
       {cover ? (
         <div className="absolute left-0 top-0 w-full h-full">
           <img className="w-full h-full object-cover" src={cover} alt={cover} />
         </div>
       ) : null}
       <div
-        className={`relative container mx-auto px-2 md:px-10 lg:px-40 text-center text-gray-900 ${
+        className={`relative container mx-auto px-2 md:px-10 lg:px-40 text-center text-gray-900 dark:text-white ${
           mini ? 'py-24 pb-10 md:py-32' : 'py-56'
         }`}
       >

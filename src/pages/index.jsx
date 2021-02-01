@@ -74,17 +74,17 @@ export default function HomePage(props) {
         cover={siteMetadata.cover}
       />
       <PostWall posts={pinedPosts} />
-      <div className="px-6 py-24 lg:py-40 bg-yellow-50 bg-opacity-50">
+      <div className="px-6 py-24 lg:py-40 bg-yellow-50 dark:bg-gray-800 bg-opacity-50">
         <div className="container mx-auto">
           <PostList posts={posts} />
           {hasNextPage ? (
             <div className="mt-8 flex justify-center">
               <Link
-                className="py-2 px-6"
+                className="py-2 px-6 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
                 to={`/pages/${currentPage + 1}#page-${currentPage + 1}`}
               >
                 <svg
-                  className="animate-bounce w-6 h-6 text-amber-900"
+                  className="animate-bounce w-6 h-6"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
