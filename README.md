@@ -1,4 +1,4 @@
-# little
+# gatsby-theme-mini
 
 > A clean and delicate theme for blog based on Gatsby.
 
@@ -7,13 +7,13 @@
 
 ## Getting started
 
-Installing little is quite easy. However, you do need to have a couple of other things installed first:
+Installing gatsby-theme-mini is quite easy. However, you do need to have a couple of other things installed first:
 
 - [Node.js](https://nodejs.org/en/)
 - [yarn](http://yarnpkg.com/) (If you prefer yarn instead of npm)
 
 ```shell
-git clone https://github.com/sqrthree/little.git myblog
+git clone https://github.com/sqrthree/gatsby-theme-mini.git myblog
 cd myblog
 yarn install // or `npm install`
 ```
@@ -78,7 +78,7 @@ A better solution is to create a local configuration file, `production.yaml`, in
 
 `production.yaml` is intended to not be tracked in your version control system.
 
-To [config/default.yaml](https://github.com/sqrthree/little/blob/master/config/default.yaml) to get more details.
+To [config/default.yaml](https://github.com/sqrthree/gatsby-theme-mini/blob/master/config/default.yaml) to get more details.
 
 ## Developing
 
@@ -97,8 +97,8 @@ To [config/default.yaml](https://github.com/sqrthree/little/blob/master/config/d
 ### Setting up Dev
 
 ```shell
-git clone https://github.com/sqrthree/little.git
-cd little
+git clone https://github.com/sqrthree/gatsby-theme-mini.git
+cd gatsby-theme-mini
 yarn install
 yarn run start
 ```

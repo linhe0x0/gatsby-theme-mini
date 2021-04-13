@@ -1,4 +1,4 @@
-# little
+# gatsby-theme-mini
 
 [在线演示](http://blog.sqrtthree.com/)
 
@@ -6,13 +6,13 @@
 
 ## 起步
 
-安装 little 非常容易。然而，在安装之前你需要先具备以下环境：
+安装 gatsby-theme-mini 非常容易。然而，在安装之前你需要先具备以下环境：
 
 - [Node.js](https://nodejs.org/en/)
 - [yarn](http://yarnpkg.com/)
 
 ```shell
-git clone https://github.com/sqrthree/little.git myblog
+git clone https://github.com/sqrthree/gatsby-theme-mini.git myblog
 cd myblog
 yarn install // or `npm install`
 ```
@@ -69,13 +69,13 @@ myblog
 
 ## 配置
 
-你可以修改 [config/default.yaml](https://github.com/sqrthree/little/blob/master/config/default.yaml) 文件来进行个性化配置。
+你可以修改 [config/default.yaml](https://github.com/sqrthree/gatsby-theme-mini/blob/master/config/default.yaml) 文件来进行个性化配置。
 
 一个更好的方案是在 `config` 中创建一个名为 `production.yaml` 文件。`production.yaml` 中的配置将会覆盖默认配置。
 
 `production.yaml` 旨在不会被版本控制系统追踪修改。
 
-有关更多的个性化配置信息请查看 [config/default.yaml](https://github.com/sqrthree/little/blob/master/config/default.yaml)。
+有关更多的个性化配置信息请查看 [config/default.yaml](https://github.com/sqrthree/gatsby-theme-mini/blob/master/config/default.yaml)。
 
 ## 开发
 
@@ -94,8 +94,8 @@ myblog
 ### 设置开发环境
 
 ```shell
-git clone https://github.com/sqrthree/little.git
-cd little
+git clone https://github.com/sqrthree/gatsby-theme-mini.git
+cd gatsby-theme-mini
 yarn install
 yarn run start
 ```
