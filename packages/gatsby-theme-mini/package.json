@@ -27,6 +27,9 @@
   "engines": {
     "node": ">=10.0.0"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
     "chalk": "^4.1.0",
