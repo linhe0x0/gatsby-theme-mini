@@ -32,7 +32,7 @@ const createPaginationPage = (data, createPage) => {
 
       createPage({
         path: `/pages/${i}`,
-        component: path.resolve('./src/pages/index.jsx'),
+        component: path.resolve(__dirname, 'src/pages/index.jsx'),
         context: {
           pageCount,
           perPage,
@@ -56,7 +56,7 @@ const createPostPage = (data, createPage) => {
 
     createPage({
       path: `/articles${dateString}${slug}`,
-      component: path.resolve('./src/templates/post.jsx'),
+      component: path.resolve(__dirname, 'src/templates/post.jsx'),
       context: {
         title,
         cover,

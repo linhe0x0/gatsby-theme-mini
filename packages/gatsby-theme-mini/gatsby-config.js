@@ -1,18 +1,27 @@
-const config = require('config')
+process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
-const siteMetadata = config.util.loadFileConfigs()
+const config = require('config')
+const path = require('path')
+const _ = require('lodash')
+
+const defaultSiteMetadata = config.util.loadFileConfigs(
+  path.resolve(__dirname, 'config')
+)
+const userSiteMetadata = config.util.loadFileConfigs()
+
+const siteMetadata = _.defaults(userSiteMetadata, defaultSiteMetadata)
 
 module.exports = {
   siteMetadata,
   plugins: [
-    'gatsby-plugin-postcss',
+    // 'gatsby-plugin-postcss',
     'gatsby-plugin-dark-mode',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'post',
-        path: `${__dirname}/posts/`,
+        path: `posts/`,
         ignore: [`!(md)`],
       },
     },
