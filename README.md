@@ -51,9 +51,9 @@ Once initialised, here’s what your project folder will look like:
 
 ## Configuration
 
-You can modify site settings in [config/default.yaml](./packages/gatsby-theme-mini/config/default.yaml).
+You can modify site settings in [config/default.yaml](https://github.com/sqrthree/gatsby-theme-mini/blob/master/packages/gatsby-theme-mini/config/default.yaml).
 
-To [config/default.yaml](./packages/gatsby-theme-mini/config/default.yaml) to get more details.
+To [config/default.yaml](https://github.com/sqrthree/gatsby-theme-mini/blob/master/packages/gatsby-theme-mini/config/default.yaml) to get more details.
 
 ## Developing
 

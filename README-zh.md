@@ -50,9 +50,9 @@ mkdir config && touch config/default.yaml
 
 ## 配置
 
-你可以修改 [config/default.yaml](./packages/gatsby-theme-mini/config/default.yaml) 文件来进行个性化配置。
+你可以修改 [config/default.yaml](https://github.com/sqrthree/gatsby-theme-mini/blob/master/packages/gatsby-theme-mini/config/default.yaml) 文件来进行个性化配置。
 
-有关更多的个性化配置信息请查看 [config/default.yaml](./packages/gatsby-theme-mini/config/default.yaml)。
+有关更多的个性化配置信息请查看 [config/default.yaml](https://github.com/sqrthree/gatsby-theme-mini/blob/master/packages/gatsby-theme-mini/config/default.yaml)。
 
 ## 开发
 
