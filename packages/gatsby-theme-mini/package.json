@@ -31,6 +31,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
+    "autoprefixer": "^10.2.5",
     "config": "^3.3.0",
     "gatsby-plugin-dark-mode": "^1.1.2",
     "gatsby-plugin-nprogress": "^3.3.0",
@@ -40,17 +41,16 @@
     "gatsby-remark-prismjs": "^5.0.0",
     "gatsby-source-filesystem": "^3.3.0",
     "gatsby-transformer-remark": "^4.0.0",
-    "prismjs": "^1.19.0",
     "lodash": "^4.17.20",
+    "postcss": "^8.2.10",
+    "prismjs": "^1.19.0",
     "prop-types": "~15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-feather": "^2.0.9",
     "react-helmet": "^6.1.0",
     "react-markdown": "^5.0.3",
-    "tailwindcss": "^2.1.1",
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.10"
+    "tailwindcss": "^2.1.1"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
