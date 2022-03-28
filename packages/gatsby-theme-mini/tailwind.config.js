@@ -1,5 +1,7 @@
+const path = require('path')
+
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [path.join(__dirname, './src/**/*.{js,jsx,ts,tsx}')],
   darkMode: 'class',
   theme: {
     extend: {},

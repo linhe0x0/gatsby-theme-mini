@@ -14,7 +14,7 @@ const siteMetadata = _.defaults(userSiteMetadata, defaultSiteMetadata)
 module.exports = {
   siteMetadata,
   plugins: [
-    // 'gatsby-plugin-postcss',
+    'gatsby-plugin-postcss',
     'gatsby-plugin-dark-mode',
     'gatsby-plugin-react-helmet',
     {
