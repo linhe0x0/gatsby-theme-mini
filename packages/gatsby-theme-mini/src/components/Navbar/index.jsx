@@ -34,7 +34,7 @@ export default function Navbar(props) {
           <div className="flex-none text-gray-900 dark:text-white font-bold">
             <Link to="/">{name}</Link>
           </div>
-          <div>
+          <div className="flex divide-x">
             <ul className="flex space-x-2">
               <li className="transition rounded hover:bg-gray-200 dark:hover:bg-gray-800">
                 <Link
@@ -52,11 +52,13 @@ export default function Navbar(props) {
                   TAG
                 </Link>
               </li>
-              <li className="transition rounded hover:bg-gray-200 dark:hover:bg-gray-800">
+            </ul>
+            <div className="ml-2">
+              <div className="transition mx-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
                 <ThemeToggler>
                   {({ theme, toggleTheme }) => (
                     <span
-                      className="block px-6 py-2 dark:text-gray-100 cursor-pointer"
+                      className="block px-3 py-2 dark:text-gray-100 cursor-pointer"
                       onClick={() =>
                         toggleTheme(theme === 'light' ? 'dark' : 'light')
                       }
@@ -69,8 +71,8 @@ export default function Navbar(props) {
                     </span>
                   )}
                 </ThemeToggler>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
