@@ -4,7 +4,6 @@ import _ from 'lodash'
 
 import Layout from '../components/Layout'
 import PageHeader from '../components/PageHeader'
-import PostWall from '../components/PostWall'
 import PostList from '../components/PostList'
 
 export const query = graphql`
@@ -62,10 +61,6 @@ export default function HomePage(props) {
     ? pageContext.currentPage
     : pageInfo.currentPage
 
-  const pinedCount = 4
-  const pinedPosts = _.slice(data.allMarkdownRemark.nodes, 0, pinedCount)
-  const posts = _.slice(nodes, pinedCount)
-
   return (
     <Layout>
       <PageHeader
@@ -73,10 +68,9 @@ export default function HomePage(props) {
         description={siteMetadata.bio}
         cover={siteMetadata.cover}
       />
-      <PostWall posts={pinedPosts} />
-      <div className="px-6 py-24 lg:py-40 bg-yellow-50 dark:bg-gray-800 bg-opacity-50">
+      <div className="px-6 py-12 lg:py-20 bg-yellow-50 dark:bg-gray-800 bg-opacity-50">
         <div className="container mx-auto">
-          <PostList posts={posts} />
+          <PostList posts={nodes} />
           {hasNextPage ? (
             <div className="mt-8 flex justify-center">
               <Link

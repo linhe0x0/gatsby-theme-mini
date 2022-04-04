@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import PostCard from '../PostCard'
+import PostItem from '../PostItem'
 import { getPermalink } from '../../helpers/permalink'
 
 export default function PostList(props) {
@@ -10,7 +10,7 @@ export default function PostList(props) {
   return (
     <div className="flex flex-col space-y-10">
       {posts.map((item) => (
-        <PostCard
+        <PostItem
           key={item.id}
           id={item.id}
           title={item.frontmatter.title}

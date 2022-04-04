@@ -29,12 +29,9 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          {
-            resolve: 'gatsby-remark-prismjs',
-          },
-          {
-            resolve: 'gatsby-remark-copy-linked-files',
-          },
+          'gatsby-remark-autolink-headers',
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
         ],
       },
     },

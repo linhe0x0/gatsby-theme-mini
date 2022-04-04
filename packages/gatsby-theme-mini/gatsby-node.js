@@ -54,6 +54,9 @@ const createPostPage = (data, createPage) => {
     const { slug } = node.fields
     const dateString = date ? `/${_.join(_.split(date, '-'), '/')}` : ''
 
+    const others = _.filter(data.edges, (edge) => edge.node.id !== item.node.id)
+    const random = _.map(_.sampleSize(others, 3), 'node')
+
     createPage({
       path: `/articles${dateString}${slug}`,
       component: path.resolve(__dirname, 'src/templates/post.jsx'),
@@ -64,6 +67,7 @@ const createPostPage = (data, createPage) => {
         excerpt: node.excerpt,
         previous,
         next,
+        random,
       },
     })
   })
