@@ -35,7 +35,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
 const createPaginationPage = (data, createPage) => {
   const { totalCount, edges } = data
-  const perPage = 10
+  const perPage = 9
   const pageCount = Math.ceil(totalCount / perPage)
 
   if (pageCount > 1) {
