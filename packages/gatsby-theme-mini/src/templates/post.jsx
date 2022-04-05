@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { graphql, Link } from 'gatsby'
 import Helmet from 'react-helmet'
-import { ArrowLeft, ChevronLeft, ChevronRight, Clock } from 'react-feather'
+import { ArrowLeft, Clock } from 'react-feather'
 import _ from 'lodash'
 
 import Layout from '../components/Layout'
@@ -9,6 +9,7 @@ import TagList from '../components/TagList'
 import ProgressBar from '../components/ProgressBar'
 import PostCard from '../components/PostCard'
 import Anchor from '../components/Anchor'
+import Author from '../components/Author'
 import { getPermalink } from '../helpers/permalink'
 
 export const query = graphql`
@@ -26,6 +27,7 @@ export const query = graphql`
         tags
         cover
         date
+        author
       }
       excerpt
       html
@@ -41,6 +43,7 @@ export const query = graphql`
 export default function PostTemplate(props) {
   const { data, pageContext } = props
   const { siteMetadata } = data.site
+
   const post = data.markdownRemark
   const tags = post.frontmatter.tags || []
 
@@ -201,8 +204,8 @@ export default function PostTemplate(props) {
               {post.frontmatter.title}
             </h1>
             <div className="flex items-center">
-              <div className="mr-4 text-base text-gray-800 dark:text-gray-300">
-                {siteMetadata.name}
+              <div className="mr-4">
+                <Author author={post.frontmatter.author} />
               </div>
               <div className="text-base text-gray-600 dark:text-gray-500">
                 {post.frontmatter.date}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { ArrowRight } from 'react-feather'
 import { Link } from 'gatsby'
 
+import Author from '../Author'
 import { getPermalink } from '../../helpers/permalink'
 
 export default function PostCard(props) {
@@ -32,16 +33,7 @@ export default function PostCard(props) {
           {data.excerpt}
         </p>
         <div className="flex items-center justify-between">
-          <div className="flex items-center text-sm">
-            {data.frontmatter.author ? (
-              <img
-                className="shrink-0 block w-8 h-8 rounded-full bg-gray-200"
-                src=""
-                alt=""
-              />
-            ) : null}
-            <h5 className="ml-2 text-gray-600">{data.frontmatter.author}</h5>
-          </div>
+          <Author author={data.frontmatter.author} />
           <p className="text-sm text-gray-400">{data.frontmatter.date}</p>
         </div>
       </Link>

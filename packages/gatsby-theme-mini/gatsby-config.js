@@ -1,15 +1,4 @@
-process.env.SUPPRESS_NO_CONFIG_WARNING = true
-
-const config = require('config')
-const path = require('path')
-const _ = require('lodash')
-
-const defaultSiteMetadata = config.util.loadFileConfigs(
-  path.resolve(__dirname, 'config')
-)
-const userSiteMetadata = config.util.loadFileConfigs()
-
-const siteMetadata = _.defaults(userSiteMetadata, defaultSiteMetadata)
+const siteMetadata = require('./site-metadata')
 
 module.exports = {
   siteMetadata,

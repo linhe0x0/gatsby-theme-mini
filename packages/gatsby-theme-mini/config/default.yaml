@@ -17,5 +17,10 @@ thumbnail: '' # The first thing people will see when someone shares your website
 # Site settings
 favicon: ''
 
+# Post metadata
+authors:
+  - name: ''
+    avatar: ''
+
 analytics:
   google: ''
