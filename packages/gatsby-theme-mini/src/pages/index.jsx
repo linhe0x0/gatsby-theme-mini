@@ -20,7 +20,7 @@ export const query = graphql`
 
     allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      limit: 14
+      limit: 10
     ) {
       pageInfo {
         totalCount

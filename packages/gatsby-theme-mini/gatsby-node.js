@@ -36,12 +36,11 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 const createPaginationPage = (data, createPage) => {
   const { totalCount, edges } = data
   const perPage = 10
-  const pinedCount = 4
-  const pageCount = Math.ceil((totalCount - pinedCount) / perPage)
+  const pageCount = Math.ceil(totalCount / perPage)
 
   if (pageCount > 1) {
     for (let i = 1; i <= pageCount; i++) {
-      const edgeList = _.slice(edges, 0, pinedCount + i * perPage)
+      const edgeList = _.slice(edges, 0, i * perPage)
       const nodes = _.map(edgeList, 'node')
       const next = _.get(_.last(edgeList), 'next')
 
