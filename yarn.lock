@@ -1887,6 +1887,11 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@tailwindcss/line-clamp@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.npmmirror.com/@tailwindcss/line-clamp/-/line-clamp-0.3.1.tgz#4d8441b509b87ece84e94f28a4aa9998413ab849"
+  integrity sha512-pNr0T8LAc3TUx/gxCfQZRe9NB2dPEo/cedPHzUGIPxqDMhgjwNm6jYxww4W5l0zAsAddxr+XfZcqttGiFDgrGg==
+
 "@tokenizer/token@^0.3.0":
   version "0.3.0"
   resolved "https://registry.npmmirror.com/@tokenizer/token/-/token-0.3.0.tgz#fe98a93fe789247e998c75e74e9c7c63217aa276"
@@ -5254,6 +5259,27 @@ gatsby-core-utils@^3.10.1, gatsby-core-utils@^3.8.2:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
+gatsby-core-utils@^3.11.1:
+  version "3.11.1"
+  resolved "https://registry.npmmirror.com/gatsby-core-utils/-/gatsby-core-utils-3.11.1.tgz#ea87c1d3aa45c26c9ea32b8e8b029afe6a56f8c7"
+  integrity sha512-Op9/uihtcsDLlZDfRsGJ1ya2mFx2YH9Zmx93bawElZ0YpIzKjCkNTp+I5i5UANxvs5I+Fljl0WHQRudMWg+fWA==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    ci-info "2.0.0"
+    configstore "^5.0.1"
+    fastq "^1.13.0"
+    file-type "^16.5.3"
+    fs-extra "^10.0.0"
+    got "^11.8.3"
+    import-from "^4.0.0"
+    lmdb "^2.2.4"
+    lock "^1.1.0"
+    node-object-hash "^2.3.10"
+    proper-lockfile "^4.1.2"
+    resolve-from "^5.0.0"
+    tmp "^0.2.1"
+    xdg-basedir "^4.0.0"
+
 gatsby-graphiql-explorer@^2.10.0:
   version "2.10.0"
   resolved "https://registry.npmmirror.com/gatsby-graphiql-explorer/-/gatsby-graphiql-explorer-2.10.0.tgz#6d36ed936170673b7439989c2617369a151c4e51"
@@ -5398,6 +5424,17 @@ gatsby-react-router-scroll@^5.10.0:
     "@babel/runtime" "^7.15.4"
     prop-types "^15.7.2"
 
+gatsby-remark-autolink-headers@^5.11.1:
+  version "5.11.1"
+  resolved "https://registry.npmmirror.com/gatsby-remark-autolink-headers/-/gatsby-remark-autolink-headers-5.11.1.tgz#ec9564f5e0122ad4553348a8ed24d6d0314434a8"
+  integrity sha512-Ft1WGD5V8qxsI+bjrHLpIYomI6ODmX0qdFbTocZvOfOfRe321wX+E8HELdHns21KyjMWACLz6CH1dKMZ3ake3g==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    github-slugger "^1.3.0"
+    lodash "^4.17.21"
+    mdast-util-to-string "^2.0.0"
+    unist-util-visit "^2.0.3"
+
 gatsby-remark-copy-linked-files@^5.10.0:
   version "5.10.0"
   resolved "https://registry.npmmirror.com/gatsby-remark-copy-linked-files/-/gatsby-remark-copy-linked-files-5.10.0.tgz#1017ab43fef033f728f2f45cb18713c95bec60b2"
@@ -5473,6 +5510,34 @@ gatsby-transformer-remark@^5.10.2:
   dependencies:
     "@babel/runtime" "^7.15.4"
     gatsby-core-utils "^3.10.1"
+    gray-matter "^4.0.3"
+    hast-util-raw "^6.0.2"
+    hast-util-to-html "^7.1.3"
+    lodash "^4.17.21"
+    mdast-util-to-hast "^10.2.0"
+    mdast-util-to-string "^2.0.0"
+    mdast-util-toc "^5.1.0"
+    remark "^13.0.0"
+    remark-footnotes "^3.0.0"
+    remark-gfm "^1.0.0"
+    remark-parse "^9.0.0"
+    remark-retext "^4.0.0"
+    remark-stringify "^9.0.1"
+    retext-english "^3.0.4"
+    sanitize-html "^1.27.5"
+    underscore.string "^3.3.6"
+    unified "^9.2.2"
+    unist-util-remove-position "^3.0.0"
+    unist-util-select "^3.0.4"
+    unist-util-visit "^2.0.3"
+
+gatsby-transformer-remark@^5.11.1:
+  version "5.11.1"
+  resolved "https://registry.npmmirror.com/gatsby-transformer-remark/-/gatsby-transformer-remark-5.11.1.tgz#e4b2f03c40f942704e4e0b6cbe7598e81166c5be"
+  integrity sha512-lS2UJcvDjNlWbBI3NyBvDk4g152BsHF7JHU1x/AnPynJpZ/fpH4BQs0xmS/WV0alfucJnoIk74MY2G+YWmy1nQ==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    gatsby-core-utils "^3.11.1"
     gray-matter "^4.0.3"
     hast-util-raw "^6.0.2"
     hast-util-to-html "^7.1.3"
@@ -5745,7 +5810,7 @@ github-from-package@0.0.0:
   resolved "https://registry.npmmirror.com/github-from-package/-/github-from-package-0.0.0.tgz#97fb5d96bfde8973313f20e8288ef9a167fa64ce"
   integrity sha512-SyHy3T1v2NUXn29OsWdxmK6RwHD+vkj3v8en8AOBZ1wBQ/hCAQ5bAQTD02kW4W9tUp/3Qh6J8r9EvntiyCmOOw==
 
-github-slugger@^1.2.1:
+github-slugger@^1.2.1, github-slugger@^1.3.0:
   version "1.4.0"
   resolved "https://registry.npmmirror.com/github-slugger/-/github-slugger-1.4.0.tgz#206eb96cdb22ee56fdc53a28d5a302338463444e"
   integrity sha512-w0dzqw/nt51xMVmlaV1+JRzN+oCa1KfcgGEWhxUG16wbdA+Xnt/yoFO8Z8x/V82ZcZ0wy6ln9QDup5avbhiDhQ==
