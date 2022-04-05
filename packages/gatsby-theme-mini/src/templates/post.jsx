@@ -211,7 +211,7 @@ export default function PostTemplate(props) {
               </div>
             </div>
           </div>
-          <div className="absolute left-0 top-0 w-2/3 h-full bg-gradient-to-r from-white dark:from-slate-900"></div>
+          <div className="absolute left-0 top-0 w-2/3 h-full bg-gradient-to-r from-white dark:from-gray-900"></div>
         </div>
       </div>
       <div className="dark:bg-gray-900 dark:text-gray-100">
@@ -277,10 +277,10 @@ export default function PostTemplate(props) {
         </div>
         <div className="relative pt-20 pb-28 bg-white dark:bg-gray-900">
           <div className="mb-12 text-3xl text-center">其他文章</div>
-          <ul className="md:flex justify-center">
+          <ul className="md:flex mx-10 lg:mx-32 xl:mx-48 2xl:mx-60 justify-center md:space-x-6 xl:space-x-8 space-y-6 md:space-y-0">
             {others.map((item) => (
-              <li key={item.id}>
-                <PostCard data={item} />
+              <li key={item.id} className="md:w-1/3">
+                <PostCard data={item} card={false} clamp />
               </li>
             ))}
           </ul>

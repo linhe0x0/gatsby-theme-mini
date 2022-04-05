@@ -20,7 +20,7 @@ export const query = graphql`
 
     allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      limit: 10
+      limit: 9
     ) {
       pageInfo {
         totalCount
@@ -69,30 +69,23 @@ export default function HomePage(props) {
         description={siteMetadata.bio}
         cover={siteMetadata.cover}
       />
-      <div className="px-6 py-12 lg:py-20 bg-yellow-50 dark:bg-gray-800 bg-opacity-50">
-        <div className="container mx-auto">
+      <div className="relative pt-20 pb-32 dark:bg-gray-900 bg-opacity-50">
+        <div className="container mx-auto px-6 md:px-10 lg:px-12">
           <PostList posts={nodes} />
-          {hasNextPage ? (
-            <div className="mt-8 flex justify-center">
-              <Link
-                className="py-2 px-6 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-                to={`/pages/${currentPage + 1}#page-${currentPage + 1}`}
-              >
-                <svg
-                  className="animate-bounce w-6 h-6"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </Link>
-            </div>
-          ) : null}
         </div>
+        {hasNextPage ? (
+          <div className="-mt-12 flex justify-center">
+            <div className="absolute b-0 h-32 pt-96 box-content inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-white pointer-events-none dark:from-gray-900"></div>
+            <Link
+              className="py-2 px-6 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+              to={`/pages/${currentPage + 1}#page-${currentPage + 1}`}
+            >
+              <button className="relative bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-sm text-white font-bold h-12 px-8 rounded-lg flex items-center dark:bg-gray-700 dark:hover:bg-gray-600 pointer-events-auto">
+                查看更多
+              </button>
+            </Link>
+          </div>
+        ) : null}
       </div>
     </Layout>
   )
