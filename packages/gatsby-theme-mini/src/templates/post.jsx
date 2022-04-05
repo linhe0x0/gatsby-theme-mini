@@ -196,8 +196,8 @@ export default function PostTemplate(props) {
         className="px-4 md:px-0 bg-gray-50 dark:bg-gray-900 bg-cover"
         style={inlineStyleOfPostHeading}
       >
-        <div className="backdrop-blur">
-          <div className="container mx-auto py-44">
+        <div className="relative">
+          <div className="container relative z-10 mx-auto py-44">
             <TagList tags={tags} />
             <h1 className="py-6 text-5xl font-extrabold text-gray-900 dark:text-gray-100">
               {post.frontmatter.title}
@@ -211,6 +211,7 @@ export default function PostTemplate(props) {
               </div>
             </div>
           </div>
+          <div className="absolute left-0 top-0 w-2/3 h-full bg-gradient-to-r from-white dark:from-slate-900"></div>
         </div>
       </div>
       <div className="dark:bg-gray-900 dark:text-gray-100">
