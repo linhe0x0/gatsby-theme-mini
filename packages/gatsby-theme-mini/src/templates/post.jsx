@@ -216,11 +216,11 @@ export default function PostTemplate(props) {
       </div>
       <div className="dark:bg-gray-900 dark:text-gray-100">
         <div
-          className="container mx-auto py-10 md:py-20"
+          className="mx-10 lg:container lg:mx-auto py-10 md:py-20"
           ref={markdownContainer}
         >
-          <div className="flex">
-            <div className="w-1/4 pr-16">
+          <div className="md:flex">
+            <div className="w-full md:w-1/4 mb-16 md:mb-0 mr-4 md:mr-6 lg:pr-16">
               <Anchor offsetTop={100}>
                 <div className="divide-y">
                   <div>

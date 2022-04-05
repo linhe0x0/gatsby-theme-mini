@@ -32,6 +32,19 @@ export default function Anchor(props) {
     }
   }, [])
 
+  useEffect(() => {
+    const handleResize = () => {
+      setOffsetLeft(container.current.parentNode.offsetLeft)
+      setOffsetWidth(container.current.parentNode.offsetWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <div
       ref={container}
