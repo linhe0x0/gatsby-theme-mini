@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import PostItem from '../PostItem'
-import { getPermalink } from '../../helpers/permalink'
 
 export default function PostList(props) {
   const { posts } = props
@@ -18,7 +17,7 @@ export default function PostList(props) {
           cover={item.frontmatter.cover}
           date={item.frontmatter.date}
           excerpt={item.excerpt}
-          path={getPermalink(item)}
+          path={item.fields.permalink}
         />
       ))}
     </div>

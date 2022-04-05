@@ -4,15 +4,13 @@ import { ArrowRight } from 'react-feather'
 import { Link } from 'gatsby'
 
 import Author from '../Author'
-import { getPermalink } from '../../helpers/permalink'
 
 export default function PostCard(props) {
   const { data } = props
-  const to = getPermalink(data)
 
   return (
     <div className="w-80 mx-4">
-      <Link to={to}>
+      <Link to={data.fields.permalink}>
         <div className="h-52 mb-4 bg-gray-200 dark:bg-gray-800 rounded-md relative">
           <img
             className="block h-full object-cover"

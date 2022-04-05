@@ -10,7 +10,6 @@ import ProgressBar from '../components/ProgressBar'
 import PostCard from '../components/PostCard'
 import Anchor from '../components/Anchor'
 import Author from '../components/Author'
-import { getPermalink } from '../helpers/permalink'
 
 export const query = graphql`
   query PostBySlug($slug: String!) {

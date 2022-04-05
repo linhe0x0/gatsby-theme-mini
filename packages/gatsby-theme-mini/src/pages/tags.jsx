@@ -5,7 +5,6 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import PageHeader from '../components/PageHeader'
 import TagList from '../components/TagList'
-import { getPermalink } from '../helpers/permalink'
 
 export const query = graphql`
   query TagQuery {
@@ -20,6 +19,7 @@ export const query = graphql`
         excerpt
         fields {
           slug
+          permalink
         }
       }
     }
@@ -67,7 +67,7 @@ export default function TagPage(props) {
                         key={post.id}
                         className="py-5 pl-4 hover:bg-gray-100 dark:hover:bg-gray-900"
                       >
-                        <Link to={getPermalink(post)}>
+                        <Link to={post.fields.permalink}>
                           <h3 className="text-lg mb-2 dark:text-gray-400">
                             {post.frontmatter.title}
                           </h3>

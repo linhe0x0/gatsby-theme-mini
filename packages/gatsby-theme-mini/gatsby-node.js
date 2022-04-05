@@ -2,6 +2,13 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const _ = require('lodash')
 
+function getPermalink(date, slug) {
+  const prefix = '/posts'
+  const dateString = date ? `/${_.join(_.split(date, '-'), '/')}` : ''
+
+  return `${prefix}${dateString}${slug}`
+}
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
@@ -15,6 +22,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     node,
     name: 'slug',
     value: slug,
+  })
+
+  const permalink = getPermalink(node.frontmatter.date, slug)
+
+  createNodeField({
+    node,
+    name: 'permalink',
+    value: permalink,
   })
 }
 
@@ -47,23 +62,28 @@ const createPaginationPage = (data, createPage) => {
   }
 }
 
-const createPostPage = (data, createPage) => {
-  _.forEach(data.edges, (item) => {
+const createPostPage = (allMarkdownRemark, createPage) => {
+  _.forEach(allMarkdownRemark.edges, (item) => {
     const { previous, node, next } = item
     const { title, cover, date } = node.frontmatter
     const { slug } = node.fields
-    const dateString = date ? `/${_.join(_.split(date, '-'), '/')}` : ''
 
-    const others = _.filter(data.edges, (edge) => edge.node.id !== item.node.id)
+    const permalink = getPermalink(date, slug)
+
+    const others = _.filter(
+      allMarkdownRemark.edges,
+      (edge) => edge.node.id !== item.node.id
+    )
     const random = _.map(_.sampleSize(others, 3), 'node')
 
     createPage({
-      path: `/articles${dateString}${slug}`,
+      path: permalink,
       component: path.resolve(__dirname, 'src/templates/post.jsx'),
       context: {
         title,
         cover,
         slug,
+        permalink,
         excerpt: node.excerpt,
         previous,
         next,
@@ -93,6 +113,7 @@ exports.createPages = ({ graphql, actions }) => {
               excerpt
               fields {
                 slug
+                permalink
               }
             }
 
@@ -107,6 +128,7 @@ exports.createPages = ({ graphql, actions }) => {
               excerpt
               fields {
                 slug
+                permalink
               }
               timeToRead
             }
@@ -121,6 +143,7 @@ exports.createPages = ({ graphql, actions }) => {
               excerpt
               fields {
                 slug
+                permalink
               }
             }
           }
