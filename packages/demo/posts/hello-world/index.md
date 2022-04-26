@@ -1,5 +1,6 @@
 ---
 title: 'Hello World'
+author: ''
 tags:
   - Hello
 cover: ''
