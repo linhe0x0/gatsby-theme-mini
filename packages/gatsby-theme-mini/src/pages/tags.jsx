@@ -57,7 +57,7 @@ export default function TagPage(props) {
               <div key={tag}>
                 <div id={`tag-${tag}`} className="pt-16 -mt-16">
                   <div className="mt-6 mb-2">
-                    <h2 className="text-xl text-indigo-600">
+                    <h2 className="text-xl text-blue-600">
                       <Link to={`#tag-${tag}`}>{tag}</Link>
                     </h2>
                   </div>

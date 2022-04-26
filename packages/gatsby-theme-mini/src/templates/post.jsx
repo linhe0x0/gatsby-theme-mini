@@ -106,9 +106,9 @@ export default function PostTemplate(props) {
       markdownBody.current.querySelectorAll(`h${maxDepth}`)
     ).reverse()
 
-    const handleScroll = () => {
+    const handleScroll = _.debounce(() => {
       const target = _.find(hs, (h) => {
-        return document.documentElement.scrollTop >= h.offsetTop
+        return document.documentElement.scrollTop >= h.offsetTop - 100
       })
 
       if (!target) {
@@ -125,7 +125,7 @@ export default function PostTemplate(props) {
       const to = decodeURIComponent(anchor.getAttribute('href'))
 
       window.location.hash = to
-    }
+    }, 500)
 
     window.addEventListener('scroll', handleScroll)
 
@@ -163,10 +163,6 @@ export default function PostTemplate(props) {
     <Layout>
       <Helmet>
         <title>{pageTitle}</title>
-        <link
-          rel="stylesheet"
-          href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css"
-        />
         {/* Google / Search Engine Tags */}
         <meta itemProp="name" content={pageTitle} />
         <meta itemProp="description" content={pageContext.excerpt} />
@@ -206,12 +202,12 @@ export default function PostTemplate(props) {
               <div className="mr-4">
                 <Author author={post.frontmatter.author} />
               </div>
-              <div className="text-base text-gray-600 dark:text-gray-500">
+              <div className="text-base text-gray-700 dark:text-gray-500">
                 {post.frontmatter.date}
               </div>
             </div>
           </div>
-          <div className="absolute left-0 top-0 w-2/3 h-full bg-gradient-to-r from-white dark:from-gray-900"></div>
+          <div className="absolute left-0 top-0 w-2/3 h-full bg-gradient-to-r from-gray-500 dark:from-gray-900"></div>
         </div>
       </div>
       <div className="dark:bg-gray-900 dark:text-gray-100">

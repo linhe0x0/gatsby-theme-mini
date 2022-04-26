@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'markcss';
+
 @import './markdown.css';
-@import './highlight.css';
-@import './archor.css';
