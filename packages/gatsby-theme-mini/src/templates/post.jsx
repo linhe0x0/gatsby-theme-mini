@@ -108,11 +108,11 @@ export default function PostTemplate(props) {
 
     const handleScroll = _.debounce(() => {
       const target = _.find(hs, (h) => {
-        return document.documentElement.scrollTop >= h.offsetTop - 100
+        return document.documentElement.scrollTop >= h.offsetTop - 60
       })
 
       if (!target) {
-        window.location.hash = ''
+        setActiveAnchor('')
         return
       }
 
@@ -123,8 +123,9 @@ export default function PostTemplate(props) {
       }
 
       const to = decodeURIComponent(anchor.getAttribute('href'))
+      const toName = to.substring(1)
 
-      window.location.hash = to
+      setActiveAnchor(toName)
     }, 500)
 
     window.addEventListener('scroll', handleScroll)
