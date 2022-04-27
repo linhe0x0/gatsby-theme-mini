@@ -1,15 +1,4 @@
-process.env.SUPPRESS_NO_CONFIG_WARNING = true
-
-const config = require('config')
-const path = require('path')
-const _ = require('lodash')
-
-const defaultSiteMetadata = config.util.loadFileConfigs(
-  path.resolve(__dirname, 'config')
-)
-const userSiteMetadata = config.util.loadFileConfigs()
-
-const siteMetadata = _.defaults(userSiteMetadata, defaultSiteMetadata)
+const siteMetadata = require('./site-metadata')
 
 module.exports = {
   siteMetadata,
@@ -29,19 +18,16 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          {
-            resolve: 'gatsby-remark-prismjs',
-          },
-          {
-            resolve: 'gatsby-remark-copy-linked-files',
-          },
+          'gatsby-remark-autolink-headers',
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
         ],
       },
     },
     {
       resolve: 'gatsby-plugin-nprogress',
       options: {
-        color: '#366df0',
+        color: '#2563eb',
       },
     },
   ],

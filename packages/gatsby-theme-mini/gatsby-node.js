@@ -2,6 +2,13 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const _ = require('lodash')
 
+function getPermalink(date, slug) {
+  const prefix = '/posts'
+  const dateString = date ? `/${_.join(_.split(date, '-'), '/')}` : ''
+
+  return `${prefix}${dateString}${slug}`
+}
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
@@ -16,17 +23,24 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     name: 'slug',
     value: slug,
   })
+
+  const permalink = getPermalink(node.frontmatter.date, slug)
+
+  createNodeField({
+    node,
+    name: 'permalink',
+    value: permalink,
+  })
 }
 
 const createPaginationPage = (data, createPage) => {
   const { totalCount, edges } = data
-  const perPage = 10
-  const pinedCount = 4
-  const pageCount = Math.ceil((totalCount - pinedCount) / perPage)
+  const perPage = 9
+  const pageCount = Math.ceil(totalCount / perPage)
 
   if (pageCount > 1) {
     for (let i = 1; i <= pageCount; i++) {
-      const edgeList = _.slice(edges, 0, pinedCount + i * perPage)
+      const edgeList = _.slice(edges, 0, i * perPage)
       const nodes = _.map(edgeList, 'node')
       const next = _.get(_.last(edgeList), 'next')
 
@@ -47,23 +61,32 @@ const createPaginationPage = (data, createPage) => {
   }
 }
 
-const createPostPage = (data, createPage) => {
-  _.forEach(data.edges, (item) => {
+const createPostPage = (allMarkdownRemark, createPage) => {
+  _.forEach(allMarkdownRemark.edges, (item) => {
     const { previous, node, next } = item
     const { title, cover, date } = node.frontmatter
     const { slug } = node.fields
-    const dateString = date ? `/${_.join(_.split(date, '-'), '/')}` : ''
+
+    const permalink = getPermalink(date, slug)
+
+    const others = _.filter(
+      allMarkdownRemark.edges,
+      (edge) => edge.node.id !== item.node.id
+    )
+    const random = _.map(_.sampleSize(others, 3), 'node')
 
     createPage({
-      path: `/articles${dateString}${slug}`,
+      path: permalink,
       component: path.resolve(__dirname, 'src/templates/post.jsx'),
       context: {
         title,
         cover,
         slug,
+        permalink,
         excerpt: node.excerpt,
         previous,
         next,
+        random,
       },
     })
   })
@@ -89,6 +112,7 @@ exports.createPages = ({ graphql, actions }) => {
               excerpt
               fields {
                 slug
+                permalink
               }
             }
 
@@ -103,6 +127,7 @@ exports.createPages = ({ graphql, actions }) => {
               excerpt
               fields {
                 slug
+                permalink
               }
               timeToRead
             }
@@ -117,6 +142,7 @@ exports.createPages = ({ graphql, actions }) => {
               excerpt
               fields {
                 slug
+                permalink
               }
             }
           }

@@ -1887,6 +1887,11 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@tailwindcss/line-clamp@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.npmmirror.com/@tailwindcss/line-clamp/-/line-clamp-0.3.1.tgz#4d8441b509b87ece84e94f28a4aa9998413ab849"
+  integrity sha512-pNr0T8LAc3TUx/gxCfQZRe9NB2dPEo/cedPHzUGIPxqDMhgjwNm6jYxww4W5l0zAsAddxr+XfZcqttGiFDgrGg==
+
 "@tokenizer/token@^0.3.0":
   version "0.3.0"
   resolved "https://registry.npmmirror.com/@tokenizer/token/-/token-0.3.0.tgz#fe98a93fe789247e998c75e74e9c7c63217aa276"
@@ -5398,6 +5403,17 @@ gatsby-react-router-scroll@^5.10.0:
     "@babel/runtime" "^7.15.4"
     prop-types "^15.7.2"
 
+gatsby-remark-autolink-headers@^5.12.1:
+  version "5.12.1"
+  resolved "https://registry.npmmirror.com/gatsby-remark-autolink-headers/-/gatsby-remark-autolink-headers-5.12.1.tgz#b4943b0a9d7346dd15043bd943c947e003b0070c"
+  integrity sha512-CRu9cZls6j9PiuS77gdf13g8okQNCwV/kstU5DX+EROQ2GeLtDyBUeXgyObXez20H0i6Iyk7wpR3/O8bhboa1A==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    github-slugger "^1.3.0"
+    lodash "^4.17.21"
+    mdast-util-to-string "^2.0.0"
+    unist-util-visit "^2.0.3"
+
 gatsby-remark-copy-linked-files@^5.10.0:
   version "5.10.0"
   resolved "https://registry.npmmirror.com/gatsby-remark-copy-linked-files/-/gatsby-remark-copy-linked-files-5.10.0.tgz#1017ab43fef033f728f2f45cb18713c95bec60b2"
@@ -5745,7 +5761,7 @@ github-from-package@0.0.0:
   resolved "https://registry.npmmirror.com/github-from-package/-/github-from-package-0.0.0.tgz#97fb5d96bfde8973313f20e8288ef9a167fa64ce"
   integrity sha512-SyHy3T1v2NUXn29OsWdxmK6RwHD+vkj3v8en8AOBZ1wBQ/hCAQ5bAQTD02kW4W9tUp/3Qh6J8r9EvntiyCmOOw==
 
-github-slugger@^1.2.1:
+github-slugger@^1.2.1, github-slugger@^1.3.0:
   version "1.4.0"
   resolved "https://registry.npmmirror.com/github-slugger/-/github-slugger-1.4.0.tgz#206eb96cdb22ee56fdc53a28d5a302338463444e"
   integrity sha512-w0dzqw/nt51xMVmlaV1+JRzN+oCa1KfcgGEWhxUG16wbdA+Xnt/yoFO8Z8x/V82ZcZ0wy6ln9QDup5avbhiDhQ==
@@ -7282,6 +7298,11 @@ map-visit@^1.0.0:
   integrity sha512-4y7uGv8bd2WdM9vpQsiQNo41Ln1NvhvDRuVt0k2JZQ+ezN2uaQes7lZeZ+QQUHOLQAtDaBJ+7wCbi+ab/KFs+w==
   dependencies:
     object-visit "^1.0.0"
+
+markcss@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmmirror.com/markcss/-/markcss-0.1.0.tgz#f6f234b0e5ac4310675c01481dd239153d1eff7c"
+  integrity sha512-SNBjAOIXyswFi3RcYFxwoYPLZqbHkCLJytDhMmidnukEUwG4TF98CB5B0RZl/+llAHlCOdhg/CtaooVNBGuHmw==
 
 markdown-table@^2.0.0:
   version "2.0.0"

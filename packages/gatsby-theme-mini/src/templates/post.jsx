@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import Helmet from 'react-helmet'
+import React, { useState, useEffect, useRef } from 'react'
 import { graphql, Link } from 'gatsby'
+import Helmet from 'react-helmet'
+import { ArrowLeft, Clock } from 'react-feather'
+import _ from 'lodash'
 
 import Layout from '../components/Layout'
 import TagList from '../components/TagList'
-import { ArrowRightCircle } from 'react-feather'
-import { getPermalink } from '../helpers/permalink'
-
-import '../styles/highlight.css'
-import '../styles/markdown.css'
+import ProgressBar from '../components/ProgressBar'
+import PostCard from '../components/PostCard'
+import Anchor from '../components/Anchor'
+import Author from '../components/Author'
 
 export const query = graphql`
   query PostBySlug($slug: String!) {
@@ -25,9 +26,15 @@ export const query = graphql`
         tags
         cover
         date
+        author
       }
       excerpt
       html
+      timeToRead
+      headings {
+        value
+        depth
+      }
     }
   }
 `
@@ -35,6 +42,7 @@ export const query = graphql`
 export default function PostTemplate(props) {
   const { data, pageContext } = props
   const { siteMetadata } = data.site
+
   const post = data.markdownRemark
   const tags = post.frontmatter.tags || []
 
@@ -52,14 +60,110 @@ export default function PostTemplate(props) {
     setPageLink(window.location.href)
   }, [])
 
+  const markdownContainer = useRef(null)
+  const [readingProgress, setReadingProgress] = useState(0)
+
+  useEffect(() => {
+    const height = markdownContainer.current.offsetHeight
+    const top = markdownContainer.current.offsetTop
+    const min = top
+    const max = height + top - window.innerHeight
+
+    const handleScroll = () => {
+      const t = document.documentElement.scrollTop
+
+      if (t < min) {
+        setReadingProgress(0)
+      } else if (t > max) {
+        setReadingProgress(100)
+      } else {
+        setReadingProgress(Math.round(((t - min) / (max - min)) * 100))
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  const maxDepth = _.minBy(post.headings, 'depth')?.depth
+  const headings = _.map(
+    _.filter(post.headings, { depth: maxDepth }),
+    (item) => {
+      return _.kebabCase(item.value)
+    }
+  )
+  const markdownBody = useRef(null)
+
+  useEffect(() => {
+    if (!maxDepth) {
+      return
+    }
+
+    const hs = Array.from(
+      markdownBody.current.querySelectorAll(`h${maxDepth}`)
+    ).reverse()
+
+    const handleScroll = _.debounce(() => {
+      const target = _.find(hs, (h) => {
+        return document.documentElement.scrollTop >= h.offsetTop - 60
+      })
+
+      if (!target) {
+        setActiveAnchor('')
+        return
+      }
+
+      const anchor = target.querySelector('.anchor')
+
+      if (!anchor) {
+        return
+      }
+
+      const to = decodeURIComponent(anchor.getAttribute('href'))
+      const toName = to.substring(1)
+
+      setActiveAnchor(toName)
+    }, 500)
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [maxDepth])
+
+  const [activeAnchor, setActiveAnchor] = useState('')
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1)
+
+      if (!hash) {
+        setActiveAnchor('')
+        return
+      }
+
+      const target = decodeURIComponent(hash)
+
+      setActiveAnchor(target)
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [])
+
+  const others = pageContext.random || []
+
   return (
     <Layout>
       <Helmet>
         <title>{pageTitle}</title>
-        <link
-          rel="stylesheet"
-          href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css"
-        />
         {/* Google / Search Engine Tags */}
         <meta itemProp="name" content={pageTitle} />
         <meta itemProp="description" content={pageContext.excerpt} />
@@ -86,115 +190,96 @@ export default function PostTemplate(props) {
         />
       </Helmet>
       <div
-        className="px-4 md:px-0 pt-36 pb-16 md:pb-36 bg-gray-50 dark:bg-gray-900 bg-cover"
+        className="px-4 md:px-0 bg-gray-50 dark:bg-gray-900 bg-cover"
         style={inlineStyleOfPostHeading}
       >
-        <div className="container mx-auto">
-          <TagList tags={tags} />
-          <h1 className="py-6 text-5xl font-extrabold text-gray-900 dark:text-gray-100">
-            {post.frontmatter.title}
-          </h1>
-          <div className="flex items-center">
-            <div className="mr-4 text-base text-gray-800 dark:text-gray-300">
-              {siteMetadata.name}
-            </div>
-            <div className="text-base text-gray-500 dark:text-gray-500">
-              {post.frontmatter.date}
+        <div className="relative">
+          <div className="container relative z-10 mx-auto py-44">
+            <TagList tags={tags} />
+            <h1 className="py-6 text-5xl font-extrabold text-gray-900 dark:text-gray-100">
+              {post.frontmatter.title}
+            </h1>
+            <div className="flex items-center">
+              <div className="mr-4">
+                <Author author={post.frontmatter.author} />
+              </div>
+              <div className="text-base text-gray-700 dark:text-gray-500">
+                {post.frontmatter.date}
+              </div>
             </div>
           </div>
+          <div className="absolute left-0 top-0 w-2/3 h-full bg-gradient-to-r from-gray-500 dark:from-gray-900"></div>
         </div>
       </div>
       <div className="dark:bg-gray-900 dark:text-gray-100">
-        <div className="container mx-auto px-4 py-10 md:py-20 md:px-36">
-          <article
-            className="markdown-body"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
+        <div
+          className="mx-10 lg:container lg:mx-auto py-10 md:py-20"
+          ref={markdownContainer}
+        >
+          <div className="md:flex">
+            <div className="w-full md:w-1/4 mb-16 md:mb-0 mr-4 md:mr-6 lg:pr-16">
+              <Anchor offsetTop={100}>
+                <div className="divide-y">
+                  <div>
+                    <div className="flex items-center mb-8 text-blue-600">
+                      <ArrowLeft />
+                      <Link className="ml-2 font-bold" to="/">
+                        返回首页
+                      </Link>
+                    </div>
+                    <ProgressBar value={readingProgress} />
+                    {post.timeToRead ? (
+                      <div className="flex items-center justify-center py-8 text-sm text-gray-700 dark:text-gray-500">
+                        <Clock size={18} />
+                        <span className="block mx-2">
+                          阅读大约 {post.timeToRead} 分钟
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                  <ul className="pt-8 pl-2">
+                    {headings.map((item, index) => (
+                      <li key={item}>
+                        <a
+                          className={`flex items-center my-3 text-gray-600 dark:text-gray-400 cursor-pointer text-sm ${
+                            item === activeAnchor ? 'text-blue-600' : ''
+                          }`}
+                          href={`#${item}`}
+                        >
+                          <span
+                            className={`block w-1.5 h-1.5 mr-3 bg-blue-600 rounded-full ${
+                              item === activeAnchor
+                                ? 'opacity-100'
+                                : 'opacity-0'
+                            } `}
+                          ></span>
+                          <span>
+                            {index + 1}. {item}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Anchor>
+            </div>
+            <div className="w-3/4">
+              <article
+                ref={markdownBody}
+                className="markdown-body"
+                dangerouslySetInnerHTML={{ __html: post.html }}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="pt-12 md:pt-24 pb-24 md:pb-32 bg-gray-50 dark:bg-gray-800">
-        <div className="flex overflow-hidden -my-8">
-          <ul className="md:flex items-center w-full py-8">
-            <li className="px-3 flex-none md:w-1/3 transform scale-90 rotate-2 hover:rotate-0">
-              {pageContext.previous ? (
-                <Link to={getPermalink(pageContext.previous)}>
-                  <figure className="shadow-lg rounded-xl flex-none">
-                    <blockquote className="rounded-t-xl bg-white dark:bg-gray-900 px-10 py-10 text-xl font-semibold text-gray-900">
-                      <svg
-                        width="45"
-                        height="36"
-                        className="mb-5 fill-current text-green-400"
-                      >
-                        <path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z" />
-                      </svg>
-                      <p className="h-20 overflow-hidden text-lg text-gray-600 font-normal">
-                        {pageContext.previous.excerpt}
-                      </p>
-                    </blockquote>
-                    <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-green-400 to-blue-400">
-                      <div className="flex-auto text-lg md:text-xl lg:text-2xl truncate">
-                        {pageContext.previous.frontmatter.title}
-                      </div>
-                      <div className="flex-none text-white">
-                        <ArrowRightCircle />
-                      </div>
-                    </figcaption>
-                  </figure>
-                </Link>
-              ) : null}
-            </li>
-            <li className="hidden md:block px-3 flex-none md:w-1/3 transform -rotate-1">
-              <figure className="shadow-lg rounded-xl flex-none">
-                <blockquote className="rounded-t-xl bg-white dark:bg-gray-900 px-10 py-10 text-xl font-semibold text-gray-900">
-                  <svg
-                    width="45"
-                    height="36"
-                    className="mb-5 fill-current text-blue-400"
-                  >
-                    <path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z" />
-                  </svg>
-                  <p className="h-20 overflow-hidden text-lg text-gray-600 font-normal">
-                    {post.excerpt}
-                  </p>
-                </blockquote>
-                <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-blue-400 to-purple-400">
-                  <div className="flex-auto text-lg md:text-xl lg:text-2xl truncate">
-                    {post.frontmatter.title}
-                  </div>
-                  <div className="flex-none text-white">
-                    <ArrowRightCircle />
-                  </div>
-                </figcaption>
-              </figure>
-            </li>
-            <li className="px-3 flex-none md:w-1/3 transform scale-90 rotate-1 hover:rotate-0">
-              {pageContext.next ? (
-                <Link to={getPermalink(pageContext.next)}>
-                  <figure className="shadow-lg rounded-xl flex-none">
-                    <blockquote className="rounded-t-xl bg-white dark:bg-gray-900 px-10 py-10 text-xl font-semibold text-gray-900">
-                      <svg
-                        width="45"
-                        height="36"
-                        className="mb-5 fill-current text-purple-400"
-                      >
-                        <path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z" />
-                      </svg>
-                      <p className="h-20 overflow-hidden text-lg text-gray-600 font-normal">
-                        {pageContext.next.excerpt}
-                      </p>
-                    </blockquote>
-                    <figcaption className="flex items-center space-x-4 px-10 py-6 rounded-b-xl text-white bg-gradient-to-br from-purple-400 to-pink-500">
-                      <div className="flex-auto text-lg md:text-xl lg:text-2xl truncate">
-                        {pageContext.next.frontmatter.title}
-                      </div>
-                      <div className="flex-none text-white">
-                        <ArrowRightCircle />
-                      </div>
-                    </figcaption>
-                  </figure>
-                </Link>
-              ) : null}
-            </li>
+        <div className="relative pt-20 pb-28 bg-white dark:bg-gray-900">
+          <div className="mb-12 text-3xl text-center">其他文章</div>
+          <ul className="md:flex mx-10 lg:mx-32 xl:mx-48 2xl:mx-60 justify-center md:space-x-6 xl:space-x-8 space-y-6 md:space-y-0">
+            {others.map((item) => (
+              <li key={item.id} className="md:w-1/3">
+                <PostCard data={item} card={false} clamp />
+              </li>
+            ))}
           </ul>
         </div>
       </div>

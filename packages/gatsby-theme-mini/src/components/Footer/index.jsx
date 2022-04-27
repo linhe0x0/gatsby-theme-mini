@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Footer = () => (
-  <footer>
+  <footer className="relative">
     <div className="bg-black px-4 py-16">
       <div className="container mx-auto text-gray-200">
         <h6 className="text-lg">内容许可</h6>
