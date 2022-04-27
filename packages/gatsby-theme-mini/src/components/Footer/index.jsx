@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Footer = (props) => {
-  const { copyright } = props
+  const { copyright, powerBy } = props
 
   return (
     <footer className="relative">
@@ -20,7 +20,11 @@ const Footer = (props) => {
           </div>
         ) : null}
       </div>
-      <div className="bg-gray-900 px-4 py-3 text-xs text-right">
+      <div
+        className={`bg-gray-900 px-4 py-3 text-xs text-right ${
+          powerBy ? '' : 'hidden'
+        }`}
+      >
         <p className="container mx-auto text-gray-300">
           <strong className="font-normal">
             <a
@@ -48,6 +52,7 @@ Footer.propType = {
     name: PropTypes.string,
     link: PropTypes.string,
   }),
+  powerBy: PropTypes.bool,
 }
 
 Footer.defaultProps = {
@@ -55,6 +60,7 @@ Footer.defaultProps = {
     name: '',
     link: '',
   },
+  powerBy: true,
 }
 
 export default Footer

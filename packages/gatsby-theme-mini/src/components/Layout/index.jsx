@@ -35,6 +35,8 @@ export default function Layout(props) {
             name
             link
           }
+
+          powerBy
         }
       }
     }
@@ -66,7 +68,10 @@ export default function Layout(props) {
       </Helmet>
       <Navbar name={siteMetadata.name} social={siteMetadata.social} />
       {children}
-      <Footer copyright={siteMetadata.copyright} />
+      <Footer
+        copyright={siteMetadata.copyright}
+        powerBy={siteMetadata.powerBy}
+      />
       {siteMetadata.analytics.google ? (
         <Analytics google={siteMetadata.analytics.google} />
       ) : null}
