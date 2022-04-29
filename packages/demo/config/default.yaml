@@ -17,5 +17,10 @@ thumbnail: '' # The first thing people will see when someone shares your website
 # Site settings
 favicon: ''
 
+# Post metadata
+authors:
+  - name: 根号三
+    avatar: 'https://avatars.githubusercontent.com/u/8622362?v=4'
+
 analytics:
   google: ''
