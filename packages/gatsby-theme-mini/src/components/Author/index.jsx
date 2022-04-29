@@ -36,12 +36,12 @@ export default function Author(props) {
       {avatars.map((item, index) => (
         <img
           key={item || index}
-          className="shrink-0 block w-8 h-8 rounded-full bg-gray-200 -ml-4"
+          className={`shrink-0 block w-8 h-8 rounded-full bg-gray-200 ${index ? '-ml-4': ''}`}
           src={item}
           alt={authors[index]}
         />
       ))}
-      <h5 className="ml-2 text-gray-600">{author}</h5>
+      <h5 className="ml-2 font-bold text-gray-800 dark:text-gray-400">{author}</h5>
     </div>
   )
 }
