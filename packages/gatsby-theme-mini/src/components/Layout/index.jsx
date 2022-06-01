@@ -30,6 +30,13 @@ export default function Layout(props) {
           analytics {
             google
           }
+
+          copyright {
+            name
+            link
+          }
+
+          powerBy
         }
       }
     }
@@ -61,7 +68,10 @@ export default function Layout(props) {
       </Helmet>
       <Navbar name={siteMetadata.name} social={siteMetadata.social} />
       {children}
-      <Footer />
+      <Footer
+        copyright={siteMetadata.copyright}
+        powerBy={siteMetadata.powerBy}
+      />
       {siteMetadata.analytics.google ? (
         <Analytics google={siteMetadata.analytics.google} />
       ) : null}
