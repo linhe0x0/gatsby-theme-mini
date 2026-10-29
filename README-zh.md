@@ -83,9 +83,3 @@ yarn run dev
 ## LICENSE
 
 该项目基于 MIT License 发布。
-
----
-
-> [sqrtthree.com](http://sqrtthree.com/) &nbsp;&middot;&nbsp;
-> GitHub [@sqrthree](https://github.com/sqrthree) &nbsp;&middot;&nbsp;
-> Twitter [@sqrtthree](https://twitter.com/sqrtthree)
